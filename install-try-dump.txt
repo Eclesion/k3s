@@ -1,0 +1,108 @@
+curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644 --disable servicelb --token gramen --node-taint CriticalAddonsOnly=true:NoExecute --bind-address 192.168.68.101 --disable-cloud-controller --disable local-storage
+
+[control]
+pi-cluster-1  ansible_connection=local var_hostname=pi-cluster-1                                                                                                                                                   
+                                                                                                                                                                                                                   
+[workers]
+pi-cluster-2  ansible_connection=ssh var_hostname=pi-cluster-2 var_disk=sdb var_uuid=55454436-f051-422f-9e28-84b2c626ea92                                                                                                 
+pi-cluster-3  ansible_connection=ssh var_hostname=pi-cluster-3 var_disk=sdb var_uuid=3b9ae934-9132-493c-bdd7-049d1d569550
+pi-cluster-4  ansible_connection=ssh var_hostname=pi-cluster-4 var_disk=sdb var_uuid=f35393d4-5e35-457a-bcb5-ef1948263f16
+pi-cluster-5  ansible_connection=ssh var_hostname=pi-cluster-5 var_disk=sdb var_uuid=2936c1d6-5124-4a56-a668-187d266e0fba 
+                                                                                                                                                                                                                   
+[picluster:children]
+control                                                                                                                                                                                                            
+workers                                                                                                                                                                                                            
+
+<bb4/52ug3KUX3u/tr5gJzkYraFgln90AciAWY3cUE3JH0+2Zjmrhs1Gj5wEjf+NDJaUwgcIM7Z+4gXrtXXMQs7o6j03Juybf/6Hw4zlEDq2XhYQ0f2Zh/sBbwzuL3rOOyCi3aA1dYEOeantM= root@pi-cluster-1 
+
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJlQlaQIbECXYCzO8CBx/4fHHJqmLzrOf2TgnFBI3y0hiWuoAVKtpK4bvwLJCVSB1p/XREzJuRzKbqV404QpQpVixg/CrSYtmtG8XGAVxeFvYnYg7atv3bMTMr43KVdiWjxfBekpcaSGtEvZagW5kicPmN3+o5VOG1mq/I+xWPdxb
+ovd/CMYyLTC9/iDonxd0rZ4SXjfr23k2GhlZ1RUZbdFPVt8XLcRNzQG2tLRN+0kk96s8RLAwmXP4H9hwmi5NshEnwXnMTnnFHLGa1FRbmZnZH5Oqm1WwBmD5BUBjeaOQ+jmLLKlkcyTeu9TxGorJ7iuhaUxK9OarIG5WlWibgQ7rmuI4fkB8wx4LMhC3fXjLdtqFbb4/52ug3KUX3u/
+tr5gJzkYraFgln90AciAWY3cUE3JH0+2Zjmrhs1Gj5wEjf+NDJaUwgcIM7Z+4gXrtXXMQs7o6j03Juybf/6Hw4zlEDq2XhYQ0f2Zh/sBbwzuL3rOOyCi3aA1dYEOeantM= root@pi-cluster-1
+
+
+curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644 --disable servicelb --token gramen --node-taint CriticalAddonsOnly=true:NoExecute --bind-address 192.168.68.101 --disable-cloud-controller --disable local-storage
+
+kubectl label nodes pi-cluster-5 kubernetes.io/role=worker
+kubectl label nodes pi-cluster-2 kubernetes.io/role=worker
+kubectl label nodes pi-cluster-3 kubernetes.io/role=worker
+kubectl label nodes pi-cluster-4 kubernetes.io/role=worker
+
+kubectl label nodes pi-cluster-5 node-type=worker
+kubectl label nodes pi-cluster-2 node-type=worker
+kubectl label nodes pi-cluster-3 node-type=worker
+kubectl label nodes pi-cluster-4 node-type=worker
+
+
+cat << 'EOF' | kubectl apply -f -
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: default-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 192.168.68.200-192.168.68.250
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: default
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - default-pool
+EOF
+
+
+ansible picluster -b -m apt -a "name=nfs-common state=present"
+ansible picluster -b -m apt -a "name=open-iscsi state=present"
+ansible picluster -b -m apt -a "name=util-linux state=present"
+
+helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace --set defaultSettings.defaultDataPath="/storage01" --version 1.2.4
+
+kernel parameter errors (READ/WRITE FPDMA QUEUED error):
+sudo nano /etc/default/grub
+libata.force=noncq IN GRUB_CMDLINE_LINUX_DEFAULT="quiet" ERGIBT: GRUB_CMDLINE_LINUX_DEFAULT="quiet libata.force=noncq"
+sudo update-grub
+
+pod id:
+$ kubectl get pods -n <namespace> -o custom-columns=PodName:.metadata.name,PodUID:.metadata.uid
+
+23cb7b03-77c4-4616-9fe3-92db49fe246b
+
+kubectl -n my-ns delete pod,svc --all  
+
+
+echo "192.168.68.202 registry registry.picluster.dz.pzuj.net" >> /etc/hosts
+ansible picluster -b -m copy -a "src=/etc/hosts dest=/etc/hosts"
+
+
+
+
+docker tag ubuntu:16.04 registry.picluster.dz.pzuj.net:5000/my-ubuntu
+docker push registry.picluster.dz.pzuj.net:5000/my-ubuntu
+
+
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout registry.key -out registry.crt -subj "/CN=registry.picluster.dz.pzuj.net" -addext "subjectAltName=DNS:registry.picluster.dz.pzuj.net,DNS:*.picluster.dz.pzuj.net,IP:192.168.68.202"
+
+
+TLS/SSL/HTTPS Ubuntu
+ansible picluster -b -m copy -a "src=registry.crt dest=/usr/local/share/ca-certificates/registry.crt"
+ansible picluster -b -m copy -a "src=registry.key dest=/usr/local/share/ca-certificates/registry.key"
+ansible all -b -m shell -a "update-ca-certificates"
+
+
+kubectl create secret generic email-pass --from-literal email-pass="aGFsbG8yMjI=" --namespace openfaas-fn
+
+
+sudo kubectl describe pod mailme-5466dcd5bf-t444c  -n openfaas-fn
+
+echo '{ "api-key": "gr35p4inyyr4o9", "msg": "test msg", "to": "zujovic.petar@gmail.com" }' | faas-cli invoke mailme
+
+
+
+kubectl rollout restart deployment linkerd-destination -n linkerd
+kubectl rollout restart deployment linkerd-identity -n linkerd
+kubectl rollout restart deployment linkerd-proxy-injector -n linkerd
