@@ -1,0 +1,12 @@
+[control]
+pi-cluster-1  ansible_connection=local var_hostname=pi-cluster-1                                                                                                                                                   
+                                                                                                                                                                                                                   
+[workers]
+pi-cluster-2  ansible_connection=ssh var_hostname=pi-cluster-2 var_disk=sdb var_uuid=                                                                                                
+pi-cluster-3  ansible_connection=ssh var_hostname=pi-cluster-3 var_disk=sdb var_uuid=
+pi-cluster-4  ansible_connection=ssh var_hostname=pi-cluster-4 var_disk=sdb var_uuid=
+pi-cluster-5  ansible_connection=ssh var_hostname=pi-cluster-5 var_disk=sdb var_uuid=
+                                                                                                                                                                                                                   
+[picluster:children]
+control                                                                                                                                                                                                            
+workers
