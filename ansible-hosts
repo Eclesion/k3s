@@ -2,10 +2,10 @@
 pi-cluster-1  ansible_connection=local var_hostname=pi-cluster-1                                                                                                                                                   
                                                                                                                                                                                                                    
 [workers]
-pi-cluster-2  ansible_connection=ssh var_hostname=pi-cluster-2 var_disk=sdb var_uuid=                                                                                                
-pi-cluster-3  ansible_connection=ssh var_hostname=pi-cluster-3 var_disk=sdb var_uuid=
-pi-cluster-4  ansible_connection=ssh var_hostname=pi-cluster-4 var_disk=sdb var_uuid=
-pi-cluster-5  ansible_connection=ssh var_hostname=pi-cluster-5 var_disk=sdb var_uuid=
+pi-cluster-2  ansible_connection=ssh var_hostname=pi-cluster-2 var_disk=sdb var_uuid=c6a3a3cc-0925-4b14-a816-879b342331ae
+pi-cluster-3  ansible_connection=ssh var_hostname=pi-cluster-3 var_disk=sdb var_uuid=feb67cf8-ec40-4185-99c6-2c9ef2414c2f
+pi-cluster-4  ansible_connection=ssh var_hostname=pi-cluster-4 var_disk=sdb var_uuid=3ed8a0fd-38ba-4858-8fda-b9c9283f63b0
+pi-cluster-5  ansible_connection=ssh var_hostname=pi-cluster-5 var_disk=sdb var_uuid=cd2d3027-edb8-427c-9733-b13c05953e1f
                                                                                                                                                                                                                    
 [picluster:children]
 control                                                                                                                                                                                                            
