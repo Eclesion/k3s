@@ -1,0 +1,4 @@
+mirrors:
+  docker-registry:
+    endpoint:
+      - "http://registry.picluster.dz.pzuj.net:5000"
