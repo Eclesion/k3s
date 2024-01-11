@@ -1,0 +1,18 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://openfaas.picluster.dz.pzuj.net:8080
+functions:
+  mailme:
+    lang: python3
+    handler: ./mailme
+    image: registry.picluster.dz.pzuj.net:5000/mailme:latest
+
+    environment:
+      smtp_server: smtp.gmail.com
+      smtp_login: eclesion@gmail.com
+      sender: eclesion@gmail.com
+
+    secrets:
+      - api-key
+      - email-pass
