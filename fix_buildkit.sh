@@ -1,6 +1,6 @@
 #!/bin/bash
 #Set variables
-HOST_ENTRY="192.168.0.202 registry registry.cube.local"
+HOST_ENTRY="192.168.68.202 registry registry.picluster.dz.pzuj.net"
 CERT="/root/docker-registry/registry.crt"
 
 #get builder ID from docker
