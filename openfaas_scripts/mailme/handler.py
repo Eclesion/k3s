@@ -1,3 +1,12 @@
+def handle(req):
+    """handle a request to the function
+    Args:
+        req (str): request body
+    """
+
+    return req
+
+
 # import libraries we going to use
 # no shebang is needed at the start
 # all libs I'm importing are native to python so I did not put anything in requirements.txt
