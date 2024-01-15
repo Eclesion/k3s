@@ -1,0 +1,10 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: longhorn-add-trailing-slash
+  namespace: longhorn-system
+spec:
+  redirectRegex:
+    regex: ^.*/longhorn$
+    replacement: /longhorn/
