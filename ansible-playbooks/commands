@@ -1,0 +1,3 @@
+Update all WMS
+cd ~/ansible-playbooks
+ansible-playbook -i hosts.ini updatewms.yml
