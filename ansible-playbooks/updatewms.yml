@@ -1,6 +1,6 @@
 ---
 - name: Update all Ubuntu servers
-  hosts: ubuntu_servers
+  hosts: picluster
   become: yes
 
   tasks:
