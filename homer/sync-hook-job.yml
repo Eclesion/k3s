@@ -14,9 +14,6 @@ spec:
         - -c
         - |
           echo "Starting ConfigMap update job"
-          kubectl create configmap homer-config --from-file=config.yml=/path/to/config.yml --dry-run=client -o yaml
           kubectl create configmap homer-config --from-file=config.yml=/path/to/config.yml --dry-run=client -o yaml | kubectl apply -f -
-        env:
-        - name: KUBECONFIG
-          value: /root/.kube/config  # Ensure this path is correct
+      serviceAccountName: default  # Use the default service account
       restartPolicy: OnFailure
