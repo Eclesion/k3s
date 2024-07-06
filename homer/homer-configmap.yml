@@ -4,3 +4,4 @@ metadata:
   name: homer-config
 data:
   config.yml: |
+    name: 'Homer'
