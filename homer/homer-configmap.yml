@@ -4,4 +4,4 @@ metadata:
   name: homer-config
 data:
   config.yml: |
-    {{ .Files.Get "www/assets/config.yml" | nindent 4 }}
+    {{ .Files.Get "homer/www/assets/config.yml" | nindent 6 }}
