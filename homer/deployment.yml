@@ -31,9 +31,12 @@ spec:
           name: homer
         volumeMounts:
         - name: config-volume
-          mountPath: /www/assets/config.yml
+          mountPath: /www/assets/
           subPath: config.yml
       volumes:
       - name: config-volume
         configMap:
           name: homer-config
+          items:
+            - key: config.yml
+              path: config.yml
