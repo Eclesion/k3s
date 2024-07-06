@@ -31,7 +31,7 @@ spec:
           name: homer
         volumeMounts:
         - name: config-volume
-          mountPath: /www/assets/
+          mountPath: /www/assets/config.yml
           subPath: config.yml
       volumes:
       - name: config-volume
