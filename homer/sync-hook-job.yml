@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: update-configmap
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - name: update-configmap
+        image: bitnami/kubectl:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          kubectl create configmap homer-config --from-file=config.yml=/www/assets/config.yml --dry-run=client -o yaml | kubectl apply -f -
+      restartPolicy: OnFailure
