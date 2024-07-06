@@ -17,6 +17,7 @@ logo: "logo.png"
 header: true
 footer: false  # '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> 
 
+
 # Optional theme customization
 theme: default
 colors:
