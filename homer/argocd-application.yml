@@ -28,7 +28,7 @@ spec:
       source:
         repoURL: 'https://github.com/Eclesion/k3s'
         targetRevision: HEAD
-        path: 'homer'
+        path: 'homer/sync-hook-job.yml'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: default
