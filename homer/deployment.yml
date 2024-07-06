@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: homer
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: homer
+    spec:
+      containers:
+      - image: b4bz/homer
+        name: homer
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+          name: homer
