@@ -29,3 +29,11 @@ spec:
         - containerPort: 8080
           protocol: TCP
           name: homer
+        volumeMounts:
+        - name: config-volume
+          mountPath: /www/assets/config.yml
+          subPath: config.yml
+      volumes:
+      - name: config-volume
+        configMap:
+          name: homer-config
