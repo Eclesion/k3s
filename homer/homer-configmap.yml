@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: homer-config
 data:
-  config.yml: |
+  config.yml: 
     ---
 # Homepage configuration
 # See https://fontawesome.com/v5/search for icons options
