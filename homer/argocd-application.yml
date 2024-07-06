@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/Eclesion/k3s'
     targetRevision: HEAD
-    path: '/homer/'
+    path: 'homer'
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
@@ -28,7 +28,7 @@ spec:
       source:
         repoURL: 'https://github.com/Eclesion/k3s'
         targetRevision: HEAD
-        path: '/homer/'
+        path: 'homer'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: default
