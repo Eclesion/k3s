@@ -5,8 +5,8 @@ metadata:
 data:
   config.yml: |
     ---
-    # Homepage configuration
-    # See https://fontawesome.com/v5/search for icons options
+  # Homepage configuration
+  # See https://fontawesome.com/v5/search for icons options
                                                                                                                                                                                                                    
     title: "Raspberry Pi Server"
     subtitle: "Pi-Hosted ESXi UbuServ"
