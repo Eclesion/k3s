@@ -13,5 +13,10 @@ spec:
         - /bin/sh
         - -c
         - |
-          kubectl create configmap homer-config --from-file=config.yml=/www/assets/config.yml --dry-run=client -o yaml | kubectl apply -f -
+          echo "Starting ConfigMap update job"
+          kubectl create configmap homer-config --from-file=config.yml=/path/to/config.yml --dry-run=client -o yaml
+          kubectl create configmap homer-config --from-file=config.yml=/path/to/config.yml --dry-run=client -o yaml | kubectl apply -f -
+        env:
+        - name: KUBECONFIG
+          value: /root/.kube/config  # Ensure this path is correct
       restartPolicy: OnFailure
