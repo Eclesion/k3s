@@ -1,5 +1,5 @@
 master:
-  image: "jenkins/jenkins:lts"
+  image: "jenkins/jenkins"
   tag: "latest"
   imagePullPolicy: "Always"
   service:
