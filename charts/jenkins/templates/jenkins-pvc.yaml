@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "jenkins.name" . }}-pvc
+  labels:
+    {{- include "jenkins.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    {{- range .Values.master.persistentVolumeClaim.accessModes }}
+    - {{ . | quote }}
+    {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.master.persistentVolumeClaim.resources.requests.storage }}
+  storageClassName: {{ .Values.master.persistentVolumeClaim.storageClassName }}

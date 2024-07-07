@@ -1,0 +1,24 @@
+master:
+  image: "jenkins/jenkins:lts"
+  tag: "latest"
+  imagePullPolicy: "Always"
+  service:
+    type: LoadBalancer
+    port: 8080
+    targetPort: 8080
+    loadBalancerIP: 192.168.68.211  
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+  persistentVolumeClaim:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 16Gi
+    storageClassName: longhorn  
+adminPassword: Q2hlZXNlMjNTdHJpbmdz

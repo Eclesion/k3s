@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "jenkins.name" . }}
+  labels:
+    {{- include "jenkins.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "jenkins.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "jenkins.name" . }}
+    spec:
+      containers:
+        - name: jenkins
+          image: {{ .Values.master.image }}:{{ .Values.master.tag }}
+          imagePullPolicy: {{ .Values.master.imagePullPolicy }}
+          ports:
+            - containerPort: 8080
+          resources:
+            {{- toYaml .Values.master.resources | nindent 12 }}
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: {{ include "jenkins.name" . }}-pvc
