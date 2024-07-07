@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO = 'https://github.com/Eclesion/k3s.git'
+        GIT_BRANCH = 'main'
+        ARGOCD_APP = 'homer-app'
+        ARGOCD_SERVER = 'https://192.168.68.208/'
+    }
+
+    triggers {
+        githubPush() // This sets up the GitHub webhook trigger
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: GIT_BRANCH, url: GIT_REPO
+            }
+        }
+
+        stage('Trigger ArgoCD Sync') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: '0e8b27f9-26e5-4ef6-bc93-7c5bd22010f9', usernameVariable: 'ARGOCD_USER', passwordVariable: 'ARGOCD_PASSWORD')]) {
+                        sh '''
+                        argocd login ${ARGOCD_SERVER} --username ${ARGOCD_USER} --password ${ARGOCD_PASSWORD} --insecure
+                        argocd app sync ${ARGOCD_APP} --grpc-web
+                        '''
+                    }
+                }
+            }
+        }
+    }
+}
