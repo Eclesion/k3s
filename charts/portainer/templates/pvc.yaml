@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ include "portainer.fullname" . }}-pvc
   labels:
-    app.kubernetes.io/name: {{ include "portainer.name" . }}
+    app.kubernetes.io/name: {{- include "portainer.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   accessModes:
