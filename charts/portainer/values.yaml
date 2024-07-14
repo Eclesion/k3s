@@ -1,0 +1,35 @@
+replicaCount: 1
+image:
+  repository: portainer/portainer-ce
+  tag: latest
+  pullPolicy: Always
+service:
+  type: LoadBalancer
+  port: 9000
+  targetPort: 9000
+  loadBalancerIP: 192.168.68.211
+resources:
+  limits:
+    cpu: "2"
+    memory: "4Gi"
+  requests:
+    cpu: "1"
+    memory: "2Gi"
+persistence:
+  enabled: true
+  storageClass: longhorn
+  accessMode: ReadWriteOnce
+  size: 20Gi
+  
+
+portainerHomeVolume:
+  enabled: true
+  name: portainer-home
+  mountPath: /var/portainer_home
+  subPath: portainer-home
+  pvc:
+    enabled: true
+    name: portainer-home-pvc
+    storageClass: longhorn
+    accessMode: ReadWriteOnce
+    size: 20Gi
