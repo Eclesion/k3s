@@ -38,7 +38,6 @@ spec:
               subPath: portainer-home
           securityContext:
             runAsUser: 1000
-            fsGroup: 999
       volumes:
         - name: portainer-home
           persistentVolumeClaim:
