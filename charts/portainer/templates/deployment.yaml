@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: {{ include "portainer.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/version: {{ .Chart.AppVersion }}
-    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -38,6 +38,7 @@ spec:
               subPath: portainer-home
           securityContext:
             runAsUser: 1000
+            fsGroup: 999
       volumes:
         - name: portainer-home
           persistentVolumeClaim:

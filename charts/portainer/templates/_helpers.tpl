@@ -10,5 +10,6 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{- define "portainer.fullname" -}}
-{{- printf "%s-%s" .Release.Name .Chart.Name }}
+{{- printf "%s-%s" .Release.Name (include "portainer.name" .) | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
