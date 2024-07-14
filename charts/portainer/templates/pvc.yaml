@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "portainer.fullname" . }}-pvc
+  name: {{ .Release.Name }}-pvc
   labels:
     {{ include "portainer.labels" . | nindent 4 }}
 spec:

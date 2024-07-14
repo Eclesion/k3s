@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "portainer.fullname" . }}
+  name: {{ .Release.Name }}
   labels:
     {{ include "portainer.labels" . | nindent 4 }}
 spec:
@@ -37,4 +37,4 @@ spec:
       volumes:
         - name: portainer-home
           persistentVolumeClaim:
-            claimName: {{ include "portainer.fullname" . }}-pvc
+            claimName: {{ .Release.Name }}-pvc
