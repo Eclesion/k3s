@@ -1,8 +1,8 @@
 replicaCount: 2
 image:
-  repository: portainer/portainer-ce
-  tag: latest
-  pullPolicy: Always
+  repository: "portainer/portainer-ce"
+  tag: "latest"
+  pullPolicy: "Always"
 service:
   type: LoadBalancer
   port: 9000
