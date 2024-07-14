@@ -3,8 +3,7 @@ kind: Service
 metadata:
   name: {{ include "portainer.fullname" . }}-service
   labels:
-    app.kubernetes.io/name: {{ include "portainer.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{ include "portainer.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,3 +11,4 @@ spec:
       targetPort: {{ .Values.service.targetPort }}
   selector:
     app.kubernetes.io/name: {{ include "portainer.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

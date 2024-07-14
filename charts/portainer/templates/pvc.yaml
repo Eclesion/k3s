@@ -3,12 +3,11 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ include "portainer.fullname" . }}-pvc
   labels:
-    app.kubernetes.io/name: {{ include "portainer.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{ include "portainer.labels" . | nindent 4 }}
 spec:
   accessModes:
     - {{ .Values.persistence.accessMode }}
   resources:
     requests:
-      storage: {{ .Values.persistence.size | quote }}
+      storage: {{ .Values.persistence.size }}
   storageClassName: {{ .Values.persistence.storageClass }}
