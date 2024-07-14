@@ -8,3 +8,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- define "portainer.name" -}}
 {{ .Chart.Name }}
 {{- end -}}
+
+{{- define "portainer.fullname" -}}
+{{- printf "%s-%s" .Release.Name .Chart.Name }}
+{{- end -}}
