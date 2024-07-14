@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "my-app.fullname" . }}
+  name: {{ include "portainer.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "my-app.name" . }}
+    app.kubernetes.io/name: {{ include "portainer.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/version: {{ .Chart.AppVersion }}
     app.kubernetes.io/managed-by: Helm
@@ -11,12 +11,12 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "my-app.name" . }}
+      app.kubernetes.io/name: {{ include "portainer.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "my-app.name" . }}
+        app.kubernetes.io/name: {{ include "portainer.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "my-app.fullname" . }}-service
+  name: {{ include "portainer.fullname" . }}-service
   labels:
-    app.kubernetes.io/name: {{ include "my-app.name" . }}
+    app.kubernetes.io/name: {{ include "portainer.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   type: {{ .Values.service.type }}
@@ -11,4 +11,4 @@ spec:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
   selector:
-    app.kubernetes.io/name: {{ include "my-app.name" . }}
+    app.kubernetes.io/name: {{ include "portainer.name" . }}
