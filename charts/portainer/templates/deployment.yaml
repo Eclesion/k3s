@@ -15,6 +15,7 @@ spec:
       labels:
         {{ include "portainer.labels" . | nindent 8 }}
     spec:
+      serviceAccountName: portainer-sa
       initContainers:
         - name: init-permissions
           image: busybox
