@@ -6,8 +6,10 @@ metadata:
     {{ include "portainer.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP | default "192.168.68.207" }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
   selector:
     app.kubernetes.io/name: {{ include "portainer.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
