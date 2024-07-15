@@ -15,34 +15,32 @@ spec:
       labels:
         {{ include "portainer.labels" . | nindent 8 }}
     spec:
-      serviceAccountName: portainer-sa-clusteradmin
       initContainers:
-      - name: init-permissions
-        image: busybox
-        command: ['sh', '-c', 'chown -R 1000:1000 /var/portainer_home && chmod -R 755 /var/portainer_home']
-        volumeMounts:
-        - name: portainer-home
-          mountPath: /var/portainer_home
+        - name: init-permissions
+          image: busybox
+          command: ['sh', '-c', 'mkdir -p /data/certs && chown -R 1000:1000 /data/certs']
+          volumeMounts:
+            - name: portainer-home
+              mountPath: /data
       containers:
-      - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        ports:
-          - containerPort: 9000
-        resources:
-          limits:
-            cpu: {{ .Values.resources.limits.cpu | quote }}
-            memory: {{ .Values.resources.limits.memory | quote }}
-          requests:
-            cpu: {{ .Values.resources.requests.cpu | quote }}
-            memory: {{ .Values.resources.requests.memory | quote }}
-        volumeMounts:
-          - name: portainer-home
-            mountPath: /var/portainer_home
-            subPath: portainer-home
-        securityContext:
-          runAsUser: 1000
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 9000
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu | quote }}
+              memory: {{ .Values.resources.limits.memory | quote }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu | quote }}
+              memory: {{ .Values.resources.requests.memory | quote }}
+          volumeMounts:
+            - name: portainer-home
+              mountPath: /data
+          securityContext:
+            runAsUser: 1000
       volumes:
-      - name: portainer-home
-        persistentVolumeClaim:
-          claimName: {{ .Release.Name }}-pvc
+        - name: portainer-home
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-pvc
