@@ -18,7 +18,7 @@ spec:
       initContainers:
         - name: init-permissions
           image: busybox
-          command: ['sh', '-c', 'mkdir -p /data/certs && chown -R 1000:1000 /data/certs']
+          command: ['sh', '-c', 'mkdir -p /data/certs /data/tls && chown -R 1000:1000 /data']
           volumeMounts:
             - name: portainer-home
               mountPath: /data
