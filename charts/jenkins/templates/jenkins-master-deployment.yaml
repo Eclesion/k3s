@@ -14,6 +14,13 @@ spec:
       labels:
         app: {{ include "jenkins.name" . }}
     spec:
+      initContainers:
+        - name: init-permissions
+          image: busybox
+          command: ['sh', '-c', 'mkdir -p /var/jenkins_home && chown -R 1000:1000 /var/jenkins_home']
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
       containers:
         - name: jenkins
           image: {{ .Values.master.image }}:{{ .Values.master.tag }}
