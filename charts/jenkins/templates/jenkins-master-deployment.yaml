@@ -33,7 +33,6 @@ spec:
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
-              subPath: jenkins-home
           securityContext:
             runAsUser: 1000
       volumes:
