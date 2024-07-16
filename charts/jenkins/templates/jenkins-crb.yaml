@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: default
+  namespace: jenkins
   name: jenkins-role
 rules:
 - apiGroups: [""]
@@ -16,7 +16,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: jenkins-rolebinding
-  namespace: default
+  namespace: jenkins
 subjects:
 - kind: ServiceAccount
   name: jenkins-sa
