@@ -36,7 +36,6 @@ spec:
               subPath: jenkins-home
           securityContext:
             runAsUser: 1000
-            fsGroup: 1000
       volumes:
         - name: jenkins-home
           persistentVolumeClaim:
