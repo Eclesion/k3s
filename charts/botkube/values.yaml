@@ -1,0 +1,25 @@
+communications:
+  discord:
+    enabled: true
+    secret:
+      name: botkube-discord-secret
+      key: botToken
+    channel: 1188268010394374234
+    notifType: "short"
+
+config:
+  settings:
+    clustername: picluster
+    upgradeNotifier: true
+    workloadNotifier: true
+
+  resources:
+    - name: "all-resources"
+      namespaces:
+        include: 
+          - "all"
+      events:
+        - create
+        - delete
+        - error
+        - update
