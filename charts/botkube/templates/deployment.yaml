@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: botkube
+  labels:
+    app: botkube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: botkube
+  template:
+    metadata:
+      labels:
+        app: botkube
+    spec:
+      containers:
+        - name: botkube
+          image: botkube/botkube:latest
+          imagePullPolicy: Always
+          env:
+            - name: BOTKUBE_COMMUNICATIONS_DISCORD_ENABLED
+              value: "true"
+            - name: BOTKUBE_COMMUNICATIONS_DISCORD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: botkube-discord-secret
+                  key: botToken
+            - name: BOTKUBE_COMMUNICATIONS_DISCORD_CHANNELS_DEFAULT_CHANNEL
+              value: "{{ .Values.communications.discord.channel }}"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

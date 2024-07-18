@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: botkube-configmap
+  namespace: botkube
+data:
+  config.yaml: |
+    settings:
+      clustername: {{ .Values.config.settings.clustername }}
+      upgradeNotifier: {{ .Values.config.settings.upgradeNotifier }}
+      workloadNotifier: {{ .Values.config.settings.workloadNotifier }}
+    resources:
+      - name: "{{ .Values.config.resources[0].name }}"
+        namespaces:
+          include: {{ .Values.config.resources[0].namespaces.include | toJson }}
+        events:
+          - create
+          - delete
+          - error
+          - update
