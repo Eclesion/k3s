@@ -4,7 +4,7 @@ metadata:
   name: botkube-configmap
   namespace: botkube
 data:
-  config.yaml: 
+  config.yaml: |
     settings:
       clustername: "{{ .Values.config.settings.clustername }}"
       upgradeNotifier: {{ .Values.config.settings.upgradeNotifier | toYaml | nindent 8 }}
