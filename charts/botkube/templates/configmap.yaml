@@ -6,15 +6,17 @@ metadata:
 data:
   config.yaml: |
     settings:
-      clustername: {{ .Values.config.settings.clustername }}
-      upgradeNotifier: {{ .Values.config.settings.upgradeNotifier }}
-      workloadNotifier: {{ .Values.config.settings.workloadNotifier }}
+      clustername: "{{ .Values.config.settings.clustername }}"
+      upgradeNotifier: {{ .Values.config.settings.upgradeNotifier | toYaml | nindent 8 }}
+      workloadNotifier: {{ .Values.config.settings.workloadNotifier | toYaml | nindent 8 }}
     resources:
       - name: "{{ .Values.config.resources[0].name }}"
         namespaces:
-          include: {{ .Values.config.resources[0].namespaces.include | toJson }}
+          include:
+            {{- range .Values.config.resources[0].namespaces.include }}
+            - "{{ . }}"
+            {{- end }}
         events:
-          - create
-          - delete
-          - error
-          - update
+          {{- range .Values.config.resources[0].events }}
+          - "{{ . }}"
+          {{- end }}
