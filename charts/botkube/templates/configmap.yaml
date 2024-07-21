@@ -13,11 +13,9 @@ data:
       - name: "{{ .Values.config.resources[0].name }}"
         namespaces:
           include:
-            {{- toYaml .Values.config.resources[0].namespaces.include | nindent 12 }}
+{{ toYaml .Values.config.resources[0].namespaces.include | indent 12 }}
         events:
-          {{- range .Values.config.resources[0].events }}
-          - {{ . }}
-          {{- end }}
+{{ toYaml .Values.config.resources[0].events | indent 12 }}
     communications:
       discord:
         enabled: {{ .Values.communications.discord.enabled }}
