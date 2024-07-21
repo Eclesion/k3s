@@ -15,7 +15,7 @@ data:
           include:
             {{ toYaml .Values.config.resources[0].namespaces.include | indent 12 }}
         events:
-          {{ toYaml .Values.config.resources[0].events | indent 10 }}
+          {{ toYaml .Values.config.resources[0].events | indent 12 }}
     communications:
       discord:
         enabled: {{ .Values.config.communications.discord.enabled | default "false" }}
