@@ -4,7 +4,7 @@ metadata:
   name: botkube
   namespace: botkube
   annotations:
-    argocd.argoproj.io/sync-wave: "1"  # Ensure ConfigMap is created before this deployment
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   replicas: 1
   selector:
@@ -19,6 +19,11 @@ spec:
       containers:
         - name: botkube
           image: "apecloud/botkube:v9.99.9-dev"
+          env:
+            - name: CONFIG_FILE_PATH
+              value: "/files/comm_config.yaml"
+            - name: RESOURCE_FILE_PATH
+              value: "/files/resource_config.yaml"
           volumeMounts:
             - name: config-volume
               mountPath: /files/comm_config.yaml
@@ -26,12 +31,6 @@ spec:
             - name: resource-config-volume
               mountPath: /files/resource_config.yaml
               subPath: resource_config.yaml
-          startupProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
       volumes:
         - name: config-volume
           configMap:
