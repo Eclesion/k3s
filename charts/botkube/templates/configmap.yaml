@@ -26,5 +26,5 @@ data:
         secret:
           name: "{{ .Values.communications.discord.secret.name }}"
           key: "{{ .Values.communications.discord.secret.key }}"
-        channel: {{ .Values.communications.discord.channel }}
+        channel: "{{ .Values.communications.discord.channel }}"
         notifType: "{{ .Values.communications.discord.notifType }}"
