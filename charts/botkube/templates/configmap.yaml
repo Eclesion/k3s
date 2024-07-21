@@ -31,7 +31,7 @@ data:
         enabled: {{ .Values.config.executors.kubectl.enabled | default "false" }}
     plugins:
       botkube/echo:
-        enabled: {{ .Values.config.plugins["botkube/echo"].enabled | default "false" }}
+        enabled: "{{ .Values.config.plugins.botkube/echo.enabled | default "false" }}"
     analytics:
       reportErrors: {{ .Values.config.analytics.reportErrors | default "false" }}
       reportUsage: {{ .Values.config.analytics.reportUsage | default "false" }}
