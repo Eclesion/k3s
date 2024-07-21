@@ -1,6 +1,6 @@
 config:
   settings:
-    clustername: picluster
+    clustername: "picluster"
     upgradeNotifier: true
     workloadNotifier: true
 
@@ -14,12 +14,12 @@ config:
         - delete
         - error
         - update
-        
+
 communications:
   discord:
     enabled: true
     secret:
-      name: botkube-discord-secret
-      key: botToken
-    channel: 1188268010394374234
+      name: "botkube-discord-secret"
+      key: "botToken"
+    channel: "1188268010394374234"
     notifType: "short"
