@@ -18,7 +18,7 @@ spec:
       serviceAccountName: botkube-sa
       containers:
         - name: botkube
-          image: "apecloud/botkube:latest"
+          image: "apecloud/botkube:v9.99.9-dev"
           volumeMounts:
             - name: config-volume
               mountPath: /files/comm_config.yaml
