@@ -1,6 +1,6 @@
 config:
   settings:
-    clustername: "picluster"
+    clustername: picluster
     upgradeNotifier: true
     workloadNotifier: true
 
@@ -8,18 +8,50 @@ config:
     - name: "all-resources"
       namespaces:
         include:
-          - "all"
+          - "default"
       events:
         - create
         - delete
         - error
         - update
 
-communications:
-  discord:
-    enabled: true
-    secret:
-      name: "botkube-discord-secret"
-      key: "botToken"
-    channel: "1188268010394374234"
-    notifType: "short"
+  communications:
+    discord:
+      enabled: true
+      secret:
+        name: botkube-discord-secret
+        key: botToken
+      channel: 1188268010394374234
+      notifType: "short"
+
+  executors:
+    kubectl:
+      enabled: true
+
+  plugins:
+    botkube/echo:
+      enabled: true
+
+  analytics:
+    reportErrors: true
+    reportUsage: true
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+persistentvolumeclaim:
+  enabled: true
+  storageClassName: "longhorn"
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+rbac:
+  create: true
