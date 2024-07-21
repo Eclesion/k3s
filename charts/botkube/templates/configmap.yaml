@@ -7,12 +7,12 @@ data:
   config.yaml: |
     settings:
       clustername: "{{ .Values.config.settings.clustername }}"
-      upgradeNotifier: {{ .Values.config.settings.upgradeNotifier }}
-      workloadNotifier: {{ .Values.config.settings.workloadNotifier }}
+      upgradeNotifier: {{ .Values.config.settings.upgradeNotifier | quote }}
+      workloadNotifier: {{ .Values.config.settings.workloadNotifier | quote }}
     resources:
       - name: "{{ .Values.config.resources[0].name }}"
         namespaces:
-          include:
+          include: 
             {{- range .Values.config.resources[0].namespaces.include }}
             - "{{ . }}"
             {{- end }}
@@ -22,7 +22,7 @@ data:
           {{- end }}
     communications:
       discord:
-        enabled: {{ .Values.communications.discord.enabled }}
+        enabled: {{ .Values.communications.discord.enabled | quote }}
         secret:
           name: "{{ .Values.communications.discord.secret.name }}"
           key: "{{ .Values.communications.discord.secret.key }}"
