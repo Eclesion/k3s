@@ -4,8 +4,10 @@ metadata:
   name: botkube-service
   namespace: botkube
 spec:
-  ports:
-    - port: 80
-      targetPort: 8080
   selector:
     app: botkube
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
