@@ -18,7 +18,7 @@ spec:
       serviceAccountName: botkube-sa
       containers:
         - name: botkube
-          image: "omkar0114/botkube:latest"
+          image: "raspbernetes/botkube:latest"
           env:
             - name: CONFIG_FILE_PATH
               value: "/files/comm_config.yaml"
