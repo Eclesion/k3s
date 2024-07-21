@@ -19,10 +19,10 @@ spec:
           image: "raspbernetes/botkube:latest"
           env:
             - name: CONFIG_FILE_PATH
-              value: "/config.yaml"
+              value: "/resource_config.yaml"
           volumeMounts:
             - name: config-volume
-              mountPath: /config.yaml
+              mountPath: /resource_config.yaml
               subPath: config.yaml
       volumes:
         - name: config-volume
