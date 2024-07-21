@@ -9,6 +9,10 @@ config:
       namespaces:
         include:
           - "default"
+          - "kube-system"
+        ignore:
+          - "kube-public"
+          - "kube-node-lease"
       events:
         - create
         - delete
@@ -27,6 +31,7 @@ config:
   executors:
     kubectl:
       enabled: true
+      config: "/kubeconfig"
 
   plugins:
     botkubeecho:

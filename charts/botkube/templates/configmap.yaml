@@ -5,46 +5,6 @@ metadata:
   namespace: botkube
 data:
   resource_config.yaml: |
-    settings:
-      clustername: "{{ .Values.config.settings.clustername }}"
-      upgradeNotifier: {{ .Values.config.settings.upgradeNotifier | default "false" }}
-      workloadNotifier: {{ .Values.config.settings.workloadNotifier | default "false" }}
-    resources:
-      {{- range .Values.config.resources }}
-      - name: "{{ .name }}"
-        namespaces:
-          include:
-            {{- range .namespaces.include }}
-            - {{ . }}
-            {{- end }}
-        events:
-          {{- range .events }}
-          - {{ . }}
-          {{- end }}
-      {{- end }}
-    communications:
-      discord:
-        enabled: {{ .Values.config.communications.discord.enabled | default "false" }}
-        secret:
-          name: "{{ .Values.config.communications.discord.secret.name }}"
-          key: "{{ .Values.config.communications.discord.secret.key }}"
-        channel: "{{ .Values.config.communications.discord.channel }}"
-        notifType: "{{ .Values.config.communications.discord.notifType }}"
-    executors:
-      kubectl:
-        enabled: {{ .Values.config.executors.kubectl.enabled | default "false" }}
-    plugins:
-      botkubeecho:
-        enabled: {{ .Values.config.plugins.botkubeecho.enabled | default "false" }}
-    analytics:
-      reportErrors: {{ .Values.config.analytics.reportErrors | default "false" }}
-      reportUsage: {{ .Values.config.analytics.reportUsage | default "false" }}
+    {{ .Files.Get "files/resource_config.yaml" | indent 4 }}
   comm_config.yaml: |
-    communications:
-      discord:
-        enabled: {{ .Values.config.communications.discord.enabled | default "false" }}
-        secret:
-          name: "{{ .Values.config.communications.discord.secret.name }}"
-          key: "{{ .Values.config.communications.discord.secret.key }}"
-        channel: "{{ .Values.config.communications.discord.channel }}"
-        notifType: "{{ .Values.config.communications.discord.notifType }}"
+    {{ .Files.Get "files/comm_config.yaml" | indent 4 }}

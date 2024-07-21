@@ -1,0 +1,32 @@
+settings:
+  clustername: "picluster"
+  upgradeNotifier: true
+  workloadNotifier: true
+
+resources:
+  - name: "all-resources"
+    namespaces:
+      include:
+        - default
+        - kube-system
+      ignore:
+        - kube-public
+        - kube-node-lease
+    events:
+      - create
+      - delete
+      - error
+      - update
+
+executors:
+  kubectl:
+    enabled: true
+    config: "/kubeconfig"  # Ensure this path matches the actual location of your kubeconfig
+
+plugins:
+  botkubeecho:
+    enabled: true
+
+analytics:
+  reportErrors: true
+  reportUsage: true
