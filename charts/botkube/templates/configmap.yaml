@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: botkube-configmap
   namespace: botkube
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"  # Ensure this is created first
 data:
   resource_config.yaml: |
     settings:

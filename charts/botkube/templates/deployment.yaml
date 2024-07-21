@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: botkube
   namespace: botkube
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"  # This will be created after the ConfigMap
 spec:
   replicas: 1
   selector:
