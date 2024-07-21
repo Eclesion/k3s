@@ -7,8 +7,8 @@ data:
   config.yaml: |
     settings:
       clustername: "{{ .Values.config.settings.clustername }}"
-      upgradeNotifier: {{ .Values.config.settings.upgradeNotifier | toYaml | nindent 8 }}
-      workloadNotifier: {{ .Values.config.settings.workloadNotifier | toYaml | nindent 8 }}
+      upgradeNotifier: {{ .Values.config.settings.upgradeNotifier }}
+      workloadNotifier: {{ .Values.config.settings.workloadNotifier }}
     resources:
       - name: "{{ .Values.config.resources[0].name }}"
         namespaces:
@@ -20,3 +20,11 @@ data:
           {{- range .Values.config.resources[0].events }}
           - "{{ . }}"
           {{- end }}
+    communications:
+      discord:
+        enabled: {{ .Values.communications.discord.enabled }}
+        secret:
+          name: "{{ .Values.communications.discord.secret.name }}"
+          key: "{{ .Values.communications.discord.secret.key }}"
+        channel: {{ .Values.communications.discord.channel }}
+        notifType: "{{ .Values.communications.discord.notifType }}"
