@@ -19,11 +19,6 @@ spec:
       containers:
         - name: botkube
           image: "raspbernetes/botkube:latest"
-          env:
-            - name: CONFIG_FILE_PATH
-              value: "/files/comm_config.yaml"
-            - name: RESOURCE_FILE_PATH
-              value: "/files/resource_config.yaml"
           volumeMounts:
             - name: config-volume
               mountPath: /files/comm_config.yaml
