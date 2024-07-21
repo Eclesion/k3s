@@ -19,23 +19,21 @@ spec:
       containers:
         - name: botkube
           image: "raspbernetes/botkube:latest"
+          env:
+            - name: CONFIG_FILE_PATH
+              value: "/config/comm_config.yaml"
+            - name: RESOURCE_FILE_PATH
+              value: "/config/resource_config.yaml"
           volumeMounts:
             - name: config-volume
-              mountPath: /files/comm_config.yaml
-              subPath: comm_config.yaml
-            - name: resource-config-volume
-              mountPath: /files/resource_config.yaml
-              subPath: resource_config.yaml
-          startupProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
+              mountPath: /config
       volumes:
         - name: config-volume
           configMap:
             name: botkube-configmap
-        - name: resource-config-volume
-          configMap:
-            name: botkube-configmap
+      startupProbe:
+        httpGet:
+          path: /healthz
+          port: 8080
+        initialDelaySeconds: 30
+        periodSeconds: 10
