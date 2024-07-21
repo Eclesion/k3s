@@ -1,9 +1,11 @@
+# ServiceAccount
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: botkube-sa
   namespace: botkube
 ---
+# ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -21,6 +23,7 @@ rules:
   - nonResourceURLs: ["/metrics"]
     verbs: ["get"]
 ---
+# ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
