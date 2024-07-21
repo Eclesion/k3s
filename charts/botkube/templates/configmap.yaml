@@ -20,18 +20,18 @@ data:
       {{- end }}
     communications:
       discord:
-        enabled: {{ .Values.communications.discord.enabled }}
+        enabled: {{ .Values.config.communications.discord.enabled | default "false" }}
         secret:
-          name: "{{ .Values.communications.discord.secret.name }}"
-          key: "{{ .Values.communications.discord.secret.key }}"
-        channel: "{{ .Values.communications.discord.channel }}"
-        notifType: "{{ .Values.communications.discord.notifType }}"
+          name: "{{ .Values.config.communications.discord.secret.name }}"
+          key: "{{ .Values.config.communications.discord.secret.key }}"
+        channel: "{{ .Values.config.communications.discord.channel }}"
+        notifType: "{{ .Values.config.communications.discord.notifType }}"
     executors:
       kubectl:
-        enabled: {{ .Values.executors.kubectl.enabled | default "false" }}
+        enabled: {{ .Values.config.executors.kubectl.enabled | default "false" }}
     plugins:
-      botkube.echo:
-        enabled: {{ .Values.plugins.botkube.echo.enabled | default "false" }}
+      botkube/echo:
+        enabled: {{ .Values.config.plugins["botkube/echo"].enabled | default "false" }}
     analytics:
-      reportErrors: {{ .Values.analytics.reportErrors | default "false" }}
-      reportUsage: {{ .Values.analytics.reportUsage | default "false" }}
+      reportErrors: {{ .Values.config.analytics.reportErrors | default "false" }}
+      reportUsage: {{ .Values.config.analytics.reportUsage | default "false" }}
