@@ -7,23 +7,28 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: botkube
+  name: botkube-clusterrole
 rules:
   - apiGroups: [""]
-    resources: ["pods", "namespaces", "services", "nodes"]
+    resources: ["pods", "services", "endpoints", "nodes", "namespaces"]
     verbs: ["get", "list", "watch"]
-  - apiGroups: ["apps"]
-    resources: ["deployments", "replicasets", "statefulsets", "daemonsets"]
+  - apiGroups: ["extensions", "apps"]
+    resources: ["deployments"]
     verbs: ["get", "list", "watch"]
+  - apiGroups: ["batch"]
+    resources: ["jobs", "cronjobs"]
+    verbs: ["get", "list", "watch"]
+  - nonResourceURLs: ["/metrics"]
+    verbs: ["get"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: botkube
+  name: botkube-crb
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: botkube
+  name: botkube-clusterrole
 subjects:
   - kind: ServiceAccount
     name: botkube-sa

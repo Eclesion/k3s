@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: botkube
-  labels:
-    app: botkube
+  namespace: botkube
 spec:
   replicas: 1
   selector:
@@ -14,19 +13,18 @@ spec:
       labels:
         app: botkube
     spec:
+      serviceAccountName: botkube-sa
       containers:
         - name: botkube
-          image: botkube/botkube:latest
-          imagePullPolicy: Always
+          image: "infracloudio/botkube:latest"
           env:
-            - name: BOTKUBE_COMMUNICATIONS_DISCORD_ENABLED
-              value: "true"
-            - name: BOTKUBE_COMMUNICATIONS_DISCORD_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: botkube-discord-secret
-                  key: botToken
-            - name: BOTKUBE_COMMUNICATIONS_DISCORD_CHANNELS_DEFAULT_CHANNEL
-              value: "{{ .Values.communications.discord.channel }}"
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            - name: CONFIG_FILE_PATH
+              value: "/config.yaml"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config.yaml
+              subPath: config.yaml
+      volumes:
+        - name: config-volume
+          configMap:
+            name: botkube-configmap

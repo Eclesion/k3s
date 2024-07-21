@@ -1,9 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: botkube
-  labels:
-    app: botkube
+  name: botkube-service
+  namespace: botkube
 spec:
   ports:
     - port: 80
