@@ -4,7 +4,7 @@ metadata:
   name: botkube
   namespace: botkube
   annotations:
-    argocd.argoproj.io/sync-wave: "1"  # This will be created after the ConfigMap
+    argocd.argoproj.io/sync-wave: "1"  # Ensures this Deployment is created after the ConfigMap
 spec:
   replicas: 1
   selector:
@@ -38,3 +38,10 @@ spec:
         - name: resource-config-volume
           configMap:
             name: botkube-configmap
+      # Add startupProbe if your application needs a health check on startup
+      startupProbe:
+        httpGet:
+          path: /healthz
+          port: 8080
+        initialDelaySeconds: 30
+        periodSeconds: 10
