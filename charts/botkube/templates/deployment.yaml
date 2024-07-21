@@ -26,6 +26,12 @@ spec:
             - name: resource-config-volume
               mountPath: /files/resource_config.yaml
               subPath: resource_config.yaml
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
       volumes:
         - name: config-volume
           configMap:
@@ -33,9 +39,3 @@ spec:
         - name: resource-config-volume
           configMap:
             name: botkube-configmap
-      startupProbe:
-        httpGet:
-          path: /healthz
-          port: 8080
-        initialDelaySeconds: 30
-        periodSeconds: 10
