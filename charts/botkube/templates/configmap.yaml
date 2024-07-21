@@ -30,8 +30,8 @@ data:
       kubectl:
         enabled: {{ .Values.config.executors.kubectl.enabled | default "false" }}
     plugins:
-      botkube-echo:
-        enabled: {{ .Values.config.plugins.botkube-echo.enabled | default "false" }}
+      botkubeecho:
+        enabled: {{ .Values.config.plugins.botkubeecho.enabled | default "false" }}
     analytics:
       reportErrors: {{ .Values.config.analytics.reportErrors | default "false" }}
       reportUsage: {{ .Values.config.analytics.reportUsage | default "false" }}
