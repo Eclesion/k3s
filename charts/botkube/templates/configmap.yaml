@@ -5,31 +5,31 @@ metadata:
   namespace: botkube
 data:
   config.yaml: |
-    settings:
-      clustername: "{{ .Values.config.settings.clustername }}"
-      upgradeNotifier: {{ .Values.config.settings.upgradeNotifier | default "false" }}
-      workloadNotifier: {{ .Values.config.settings.workloadNotifier | default "false" }}
-    resources:
-      - name: "{{ .Values.config.resources[0].name }}"
-        namespaces:
-          include:
-            {{ toYaml .Values.config.resources[0].namespaces.include | indent 12 }}
-        events:
-          {{ toYaml .Values.config.resources[0].events | indent 10 }}
-    communications:
-      discord:
-        enabled: {{ .Values.config.communications.discord.enabled | default "false" }}
-        secret:
-          name: "{{ .Values.config.communications.discord.secret.name }}"
-          key: "{{ .Values.config.communications.discord.secret.key }}"
-        channel: "{{ .Values.config.communications.discord.channel }}"
-        notifType: "{{ .Values.config.communications.discord.notifType }}"
-    executors:
-      kubectl:
-        enabled: {{ .Values.config.executors.kubectl.enabled | default "false" }}
-    plugins:
-      botkube/echo:
-        enabled: {{ .Values.config.plugins["botkube/echo"].enabled | default "false" }}
-    analytics:
-      reportErrors: {{ .Values.config.analytics.reportErrors | default "false" }}
-      reportUsage: {{ .Values.config.analytics.reportUsage | default "false" }}
+  settings:
+    clustername: "{{ .Values.config.settings.clustername }}"
+    upgradeNotifier: {{ .Values.config.settings.upgradeNotifier | default "false" }}
+    workloadNotifier: {{ .Values.config.settings.workloadNotifier | default "false" }}
+  resources:
+    - name: "{{ .Values.config.resources[0].name }}"
+      namespaces:
+        include:
+          {{ toYaml .Values.config.resources[0].namespaces.include | indent 12 }}
+      events:
+        {{ toYaml .Values.config.resources[0].events | indent 10 }}
+  communications:
+    discord:
+      enabled: {{ .Values.config.communications.discord.enabled | default "false" }}
+      secret:
+        name: "{{ .Values.config.communications.discord.secret.name }}"
+        key: "{{ .Values.config.communications.discord.secret.key }}"
+      channel: "{{ .Values.config.communications.discord.channel }}"
+      notifType: "{{ .Values.config.communications.discord.notifType }}"
+  executors:
+    kubectl:
+      enabled: {{ .Values.config.executors.kubectl.enabled | default "false" }}
+  plugins:
+    botkube/echo:
+      enabled: {{ .Values.config.plugins["botkube/echo"].enabled | default "false" }}
+  analytics:
+    reportErrors: {{ .Values.config.analytics.reportErrors | default "false" }}
+    reportUsage: {{ .Values.config.analytics.reportUsage | default "false" }}
