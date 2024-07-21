@@ -3,9 +3,18 @@ kind: ConfigMap
 metadata:
   name: botkube-configmap
   namespace: botkube
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"  # Ensure this is created first
+  labels:
+    app.kubernetes.io/instance: botkube
 data:
+  comm_config.yaml: |
+    communications:
+      discord:
+        enabled: true
+        secret:
+          name: "botkube-discord-secret"
+          key: "botToken"
+        channel: "1188268010394374234"
+        notifType: "short"
   resource_config.yaml: |
     settings:
       clustername: "picluster"
@@ -39,13 +48,3 @@ data:
     analytics:
       reportErrors: true
       reportUsage: true
-
-  comm_config.yaml: |
-    communications:
-      discord:
-        enabled: true
-        secret:
-          name: "botkube-discord-secret"
-          key: "botToken"
-        channel: "1188268010394374234"
-        notifType: "short"
