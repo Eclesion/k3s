@@ -29,7 +29,7 @@ config:
       enabled: true
 
   plugins:
-    botkube/echo:
+    botkube-echo:
       enabled: true
 
   analytics:
