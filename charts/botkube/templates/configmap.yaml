@@ -5,6 +5,45 @@ metadata:
   namespace: botkube
 data:
   resource_config.yaml: |
-    {{ .Files.Get "files/resource_config.yaml" | indent 4 }}
+    settings:
+      clustername: "picluster"
+      upgradeNotifier: true
+      workloadNotifier: true
+
+    resources:
+      - name: "all-resources"
+        namespaces:
+          include:
+            - default
+            - kube-system
+          ignore:
+            - kube-public
+            - kube-node-lease
+        events:
+          - create
+          - delete
+          - error
+          - update
+
+    executors:
+      kubectl:
+        enabled: true
+        config: "/kubeconfig"
+
+    plugins:
+      botkubeecho:
+        enabled: true
+
+    analytics:
+      reportErrors: true
+      reportUsage: true
+
   comm_config.yaml: |
-    {{ .Files.Get "files/comm_config.yaml" | indent 4 }}
+    communications:
+      discord:
+        enabled: true
+        secret:
+          name: "botkube-discord-secret"
+          key: "botToken"
+        channel: "1188268010394374234"
+        notifType: "short"
