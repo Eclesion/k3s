@@ -13,23 +13,23 @@ data:
       - name: "{{ .Values.config.resources[0].name }}"
         namespaces:
           include:
-            {{ toYaml .Values.config.resources[0].namespaces.include | indent 12 }}
+{{ toYaml .Values.config.resources[0].namespaces.include | indent 12 }}
         events:
-          {{ toYaml .Values.config.resources[0].events | indent 12 }}
+{{ toYaml .Values.config.resources[0].events | indent 12 }}
     communications:
       discord:
-        enabled: {{ .Values.config.communications.discord.enabled | default "false" }}
+        enabled: {{ .Values.communications.discord.enabled }}
         secret:
-          name: "{{ .Values.config.communications.discord.secret.name }}"
-          key: "{{ .Values.config.communications.discord.secret.key }}"
-        channel: "{{ .Values.config.communications.discord.channel }}"
-        notifType: "{{ .Values.config.communications.discord.notifType }}"
+          name: "{{ .Values.communications.discord.secret.name }}"
+          key: "{{ .Values.communications.discord.secret.key }}"
+        channel: "{{ .Values.communications.discord.channel }}"
+        notifType: "{{ .Values.communications.discord.notifType }}"
     executors:
       kubectl:
-        enabled: {{ .Values.config.executors.kubectl.enabled | default "false" }}
+        enabled: {{ .Values.executors.kubectl.enabled | default "false" }}
     plugins:
       botkube/echo:
-        enabled: {{ .Values.config.plugins["botkube/echo"].enabled | default "false" }}
+        enabled: {{ .Values.plugins["botkube/echo"].enabled | default "false" }}
     analytics:
-      reportErrors: {{ .Values.config.analytics.reportErrors | default "false" }}
-      reportUsage: {{ .Values.config.analytics.reportUsage | default "false" }}
+      reportErrors: {{ .Values.analytics.reportErrors | default "false" }}
+      reportUsage: {{ .Values.analytics.reportUsage | default "false" }}
