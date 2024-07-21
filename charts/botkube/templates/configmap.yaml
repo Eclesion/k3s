@@ -5,33 +5,29 @@ metadata:
   namespace: botkube
 data:
   resource_config.yaml: |
-    settings:
-      clustername: "{{ .Values.config.settings.clustername }}"
-      upgradeNotifier: {{ .Values.config.settings.upgradeNotifier | default "false" }}
-      workloadNotifier: {{ .Values.config.settings.workloadNotifier | default "false" }}
+    kubectl:
+      enabled: {{ .Values.config.executors.kubectl.enabled | default "false" }}
+      config: "/kubeconfig"
     resources:
-      {{- range .Values.config.resources }}
-      - name: "{{ .name }}"
-        namespaces:
-          include:
-            {{ toYaml .namespaces.include | indent 12 }}
-        events:
-          {{ toYaml .events | indent 12 }}
-      {{- end }}
-    communications:
-      discord:
-        enabled: {{ .Values.config.communications.discord.enabled | default "false" }}
-        secret:
-          name: "{{ .Values.config.communications.discord.secret.name }}"
-          key: "{{ .Values.config.communications.discord.secret.key }}"
-        channel: "{{ .Values.config.communications.discord.channel }}"
-        notifType: "{{ .Values.config.communications.discord.notifType }}"
-    executors:
-      kubectl:
-        enabled: {{ .Values.config.executors.kubectl.enabled | default "false" }}
-    plugins:
-      botkubeecho:
-        enabled: {{ .Values.config.plugins.botkubeecho.enabled | default "false" }}
-    analytics:
-      reportErrors: {{ .Values.config.analytics.reportErrors | default "false" }}
-      reportUsage: {{ .Values.config.analytics.reportUsage | default "false" }}
+      namespaces:
+        include:
+          {{- range .Values.config.resources.namespaces.include }}
+          - {{ . }}
+          {{- end }}
+        ignore:
+          {{- range .Values.config.resources.namespaces.ignore }}
+          - {{ . }}
+          {{- end }}
+      events:
+        include:
+          {{- range .Values.config.resources.events.include }}
+          - {{ . }}
+          {{- end }}
+  comm_config.yaml: |
+    discord:
+      enabled: {{ .Values.config.communications.discord.enabled | default "false" }}
+      secret:
+        name: "{{ .Values.config.communications.discord.secret.name }}"
+        key: "{{ .Values.config.communications.discord.secret.key }}"
+      channel: "{{ .Values.config.communications.discord.channel }}"
+      notifType: "{{ .Values.config.communications.discord.notifType }}"
