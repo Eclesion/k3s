@@ -3,8 +3,6 @@ kind: ConfigMap
 metadata:
   name: botkube-configmap
   namespace: botkube
-  labels:
-    app.kubernetes.io/instance: botkube
 data:
   comm_config.yaml: |
     communications:
@@ -20,7 +18,6 @@ data:
       clustername: "picluster"
       upgradeNotifier: true
       workloadNotifier: true
-
     resources:
       - name: "all-resources"
         namespaces:
@@ -35,16 +32,13 @@ data:
           - delete
           - error
           - update
-
     executors:
       kubectl:
         enabled: true
         config: "/kubeconfig"
-
     plugins:
       botkubeecho:
         enabled: true
-
     analytics:
       reportErrors: true
       reportUsage: true

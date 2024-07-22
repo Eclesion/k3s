@@ -1,0 +1,20 @@
+image:
+  repository: elestio/uptime-kuma
+  tag: latest
+
+service:
+  type: LoadBalancer
+
+persistence:
+  enabled: true
+  storageClass: longhorn
+  accessModes:
+    - ReadWriteOnce
+  size: 20Gi
+
+ingress:
+  enabled: true
+  host: kuma.picluster.dz.pzuj.net
+
+resources: {}
++

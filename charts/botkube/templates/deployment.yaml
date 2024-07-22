@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   name: botkube
   namespace: botkube
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    app: botkube
 spec:
   replicas: 1
   selector:
@@ -18,7 +18,12 @@ spec:
       serviceAccountName: botkube-sa
       containers:
         - name: botkube
-          image: "raspbernetes/botkube:latest"
+          image: raspbernetes/botkube:latest
+          env:
+            - name: CONFIG_FILE_PATH
+              value: "/files/comm_config.yaml"
+            - name: RESOURCE_FILE_PATH
+              value: "/files/resource_config.yaml"
           volumeMounts:
             - name: config-volume
               mountPath: /files/comm_config.yaml
@@ -30,6 +35,12 @@ spec:
         - name: config-volume
           configMap:
             name: botkube-configmap
+            items:
+              - key: comm_config.yaml
+                path: comm_config.yaml
         - name: resource-config-volume
           configMap:
             name: botkube-configmap
+            items:
+              - key: resource_config.yaml
+                path: resource_config.yaml
