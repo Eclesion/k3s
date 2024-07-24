@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: postgresql-pvc
   labels:
-    app: {{ include "postgresql.name" . }}
+    app: postgresql
 spec:
   accessModes:
     - ReadWriteOnce

@@ -1,8 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: postgres
-  tag: 15-alpine
+  repository: bitnami/postgresql
+  tag: 13.15.0
 
 
 service:
@@ -13,3 +13,10 @@ postgresql:
   username: zabbix
   password: zabbixpassword
   database: zabbix
+
+persistence:
+  enabled: true
+  storageClass: longhorn
+  accessModes:
+    - ReadWriteOnce
+  size: 32Gi

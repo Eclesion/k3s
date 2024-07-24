@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "postgresql.fullname" . }}
+  name: postgresql
   labels:
-    app: {{ include "postgresql.name" . }}
+    app: postgresql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ include "postgresql.name" . }}
+      app: postgresql
   template:
     metadata:
       labels:
-        app: {{ include "postgresql.name" . }}
+        app: postgresql
     spec:
       containers:
         - name: postgresql
