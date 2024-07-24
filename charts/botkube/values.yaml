@@ -49,7 +49,7 @@ communications:
 # Image settings
 image:
   repository: "infracloudio/botkube"
-  tag: "latest"
+  tag: "v0.12.4"
   pullPolicy: "IfNotPresent"
 
 # Resource requests and limits
