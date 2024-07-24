@@ -8,11 +8,11 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "postgresql.name" . }}
+      app: postgresql
   template:
     metadata:
       labels:
-        app: {{ include "postgresql.name" . }}
+        app: postgresql
     spec:
       containers:
         - name: postgresql
@@ -35,4 +35,4 @@ spec:
       volumes:
         - name: postgresql-data
           persistentVolumeClaim:
-            claimName: {{ include "postgresql.fullname" . }}-pvc
+            claimName: postgresql-pvc
