@@ -25,10 +25,10 @@ spec:
               value: "/files/resource_config.yaml"
           volumeMounts:
             - name: config-volume
-              mountPath: /files/comm_config.yaml
+              mountPath: /files
               subPath: comm_config.yaml
             - name: resource-config-volume
-              mountPath: /files/resource_config.yaml
+              mountPath: /files
               subPath: resource_config.yaml
       volumes:
         - name: config-volume
