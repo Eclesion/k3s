@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/eclesion/k3s.git'
     targetRevision: HEAD
-    path: path/to/zabbix-helm-chart
+    path: charts/zabbix
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: zabbix
