@@ -14,9 +14,6 @@ postgresql:
   existingSecret: postgresql-secret
   secretKeys:
     password: POSTGRESQL_PASSWORD
-  customConfig: |
-    # TYPE  DATABASE        USER            ADDRESS                 METHOD
-    host    all             all             0.0.0.0/0               md5
 
 persistence:
   enabled: true
@@ -25,7 +22,7 @@ persistence:
     - ReadWriteOnce
   size: 32Gi
 
-extraEnv:
+extraEnvVars:
   - name: POSTGRES_PASSWORD
     valueFrom:
       secretKeyRef:
@@ -36,3 +33,8 @@ extraEnv:
       secretKeyRef:
         name: postgresql-secret
         key: POSTGRESQL_PASSWORD
+
+initdbScripts:
+  custom_pg_hba_conf.sh: |
+    #!/bin/bash
+    echo "host    all             all             0.0.0.0/0               md5" >> /opt/bitnami/postgresql/conf/pg_hba.conf
