@@ -2,7 +2,7 @@
 Expand the name of the chart.
 */}}
 {{- define "botkube.fullname" -}}
-{{- printf "%s-%s" .Release.Name .Chart.Name | trunc 63 | trimSuffix "-" -}}
+botkube
 {{- end -}}
 
 {{/*
@@ -18,15 +18,8 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "botkube.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "botkube.name" . }}
+app.kubernetes.io/name: botkube
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end -}}
-
-{{/*
-Expand the name of the chart.
-*/}}
-{{- define "botkube.name" -}}
-{{ .Chart.Name }}
 {{- end -}}
 
 {{/*
@@ -34,4 +27,11 @@ Expand the chart name.
 */}}
 {{- define "botkube.chart" -}}
 {{ .Chart.Name }}-{{ .Chart.Version }}
+{{- end -}}
+
+{{/*
+Expand the name of the chart.
+*/}}
+{{- define "botkube.name" -}}
+botkube
 {{- end -}}
