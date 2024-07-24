@@ -15,7 +15,7 @@ postgresql:
   secretKeys:
     password: POSTGRESQL_PASSWORD
   customConfig: |
-    # Allow access from all IP addresses with MD5 password authentication
+    # TYPE  DATABASE        USER            ADDRESS                 METHOD
     host    all             all             0.0.0.0/0               md5
 
 persistence:
@@ -25,10 +25,14 @@ persistence:
     - ReadWriteOnce
   size: 32Gi
 
-# Extra environment variables to handle the postgres user password
 extraEnv:
   - name: POSTGRES_PASSWORD
     valueFrom:
       secretKeyRef:
         name: postgresql-secret
         key: POSTGRES_PASSWORD
+  - name: POSTGRESQL_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: postgresql-secret
+        key: POSTGRESQL_PASSWORD
