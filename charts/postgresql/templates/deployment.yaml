@@ -5,14 +5,14 @@ metadata:
   labels:
     app: postgresql
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: postgresql
+      app: {{ include "postgresql.name" . }}
   template:
     metadata:
       labels:
-        app: postgresql
+        app: {{ include "postgresql.name" . }}
     spec:
       containers:
         - name: postgresql
@@ -20,19 +20,19 @@ spec:
           ports:
             - containerPort: 5432
           env:
-            - name: POSTGRESQL_USERNAME
+            - name: POSTGRES_USER
               value: {{ .Values.postgresql.username }}
-            - name: POSTGRESQL_PASSWORD
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgresql-secret
                   key: POSTGRES_PASSWORD
-            - name: POSTGRESQL_DATABASE
+            - name: POSTGRES_DB
               value: {{ .Values.postgresql.database }}
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgresql-data
+            - name: postgresql-data
+              mountPath: /var/lib/postgresql/data
       volumes:
         - name: postgresql-data
           persistentVolumeClaim:
-            claimName: postgresql-pvc
+            claimName: {{ include "postgresql.fullname" . }}-pvc
