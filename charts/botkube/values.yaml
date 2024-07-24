@@ -48,7 +48,7 @@ communications:
 
 # Image settings
 image:
-  repository: "raspbernetes/botkube"
+  repository: "infracloudio/botkube"
   tag: "latest"
   pullPolicy: "IfNotPresent"
 
