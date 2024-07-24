@@ -48,8 +48,8 @@ communications:
 
 # Image settings
 image:
-  repository: "infracloudio/botkube"
-  tag: "v0.12.3"
+  repository: "raspbernetes/botkube"
+  tag: "v0.12.4"
   pullPolicy: "IfNotPresent"
 
 # Resource requests and limits
