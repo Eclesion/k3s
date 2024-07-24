@@ -1,25 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "zabbix.fullname" . }}
+  name: zabbix
+  namespace: zabbix
   labels:
-    app.kubernetes.io/name: {{ include "zabbix.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: zabbix
+    app.kubernetes.io/instance: zabbix
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "zabbix.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/name: zabbix
+      app.kubernetes.io/instance: zabbix
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "zabbix.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/name: zabbix
+        app.kubernetes.io/instance: zabbix
     spec:
       containers:
         - name: zabbix
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: 'zabbix/zabbix-server-pgsql:latest'
           ports:
             - containerPort: 80
           volumeMounts:
