@@ -1,4 +1,8 @@
 config:
+  image:
+    repository: "raspbernetes/botkube"
+    tag: "latest"
+    pullPolicy: "IfNotPresent"
   settings:
     clustername: "picluster"
     upgradeNotifier: true
