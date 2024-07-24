@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: bitnami/postgresql
+  tag: 13.4.0
+
+service:
+  type: ClusterIP
+  port: 5432
+
+postgresql:
+  username: zabbix
+  password: zabbixpassword
+  database: zabbix

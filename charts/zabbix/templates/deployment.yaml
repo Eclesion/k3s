@@ -20,9 +20,18 @@ spec:
     spec:
       containers:
         - name: zabbix
-          image: 'zabbix/zabbix-server-pgsql:latest'
+          image: "zabbix/zabbix-server-pgsql:latest"
           ports:
-            - containerPort: 80
+            - containerPort: 8080
+          env:
+            - name: DB_SERVER_HOST
+              value: postgresql
+            - name: DB_SERVER_PORT
+              value: "5432"
+            - name: DB_SERVER_DBNAME
+              value: zabbix
+            - name: DB_SERVER_SCHEMA
+              value: public
           volumeMounts:
             - name: zabbix-data
               mountPath: /var/lib/zabbix

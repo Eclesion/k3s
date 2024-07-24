@@ -5,9 +5,20 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
+env:
+  - name: DB_SERVER_HOST
+    value: postgresql
+  - name: DB_SERVER_PORT
+    value: "5432"
+  - name: DB_SERVER_DBNAME
+    value: zabbix
+  - name: DB_SERVER_SCHEMA
+    value: public
+
 service:
-  type: ClusterIP
-  port: 80
+  type: LoadBalancer
+  port: 8080
+
 
 persistence:
   enabled: true
