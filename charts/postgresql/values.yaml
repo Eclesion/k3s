@@ -1,8 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: bitnami/postgresql
-  tag: 13.4.0
+  repository: postgres
+  tag: 15-alpine
+
 
 service:
   type: ClusterIP
