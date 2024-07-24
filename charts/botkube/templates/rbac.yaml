@@ -14,26 +14,36 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: botkube-role
-  namespace: botkube
+  name: {{ include "botkube.fullname" . }}
+  labels:
+    app: {{ include "botkube.name" . }}
+    chart: {{ include "botkube.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 rules:
   - apiGroups: [""]
-    resources: ["configmaps"]
+    resources: ["pods", "namespaces"]
     verbs: ["get", "list", "watch"]
+
 
 ---
 # ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: botkube-rolebinding
-  namespace: botkube
+  name: {{ include "botkube.fullname" . }}
+  labels:
+    app: {{ include "botkube.name" . }}
+    chart: {{ include "botkube.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "botkube.fullname" . }}
 subjects:
   - kind: ServiceAccount
-    name: botkube-sa
-    namespace: botkube
-roleRef:
-  kind: Role
-  name: botkube-role
-  apiGroup: rbac.authorization.k8s.io
+    name: {{ include "botkube.fullname" . }}
+    namespace: {{ .Release.Namespace }}
+
 
