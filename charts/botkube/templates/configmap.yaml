@@ -3,10 +3,8 @@ kind: ConfigMap
 metadata:
   name: botkube-configmap
   namespace: botkube
-  labels:
-    app: botkube
 data:
-  botkube-config.yaml: |
+  config.yaml: |
     communications:
       discord:
         enabled: true

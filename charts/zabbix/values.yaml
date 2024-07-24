@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: zabbix/zabbix-server-pgsql
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+persistence:
+  enabled: true
+  storageClass: longhorn
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi

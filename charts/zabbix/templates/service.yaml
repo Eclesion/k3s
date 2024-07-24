@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zabbix
+  namespace: zabbix
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.68.212
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app.kubernetes.io/name: zabbix

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "zabbix.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "zabbix.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "zabbix.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "zabbix.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: zabbix
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: zabbix-data
+              mountPath: /var/lib/zabbix
+      volumes:
+        - name: zabbix-data
+          persistentVolumeClaim:
+            claimName: zabbix-pvc
