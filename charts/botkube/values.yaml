@@ -1,43 +1,71 @@
-config:
-  image:
-    repository: "raspbernetes/botkube"
-    tag: "latest"
-    pullPolicy: "IfNotPresent"
-  settings:
-    clustername: "picluster"
-    upgradeNotifier: true
-    workloadNotifier: true
-  communications:
-    discord:
-      enabled: true
-      secret:
-        name: "botkube-discord-secret"
-        key: "botToken"
-      channel: "1188268010394374234"
-      notifType: "short"
-  resources:
-    - name: "all-resources"
-      namespaces:
-        include:
-          - default
-          - kube-system
-        ignore:
-          - kube-public
-          - kube-node-lease
-      events:
-        - create
-        - delete
-        - error
-        - update
-  executors:
-    kubectl:
-      enabled: true
-      config: "/kubeconfig"
-  plugins:
-    botkubeecho:
-      enabled: true
-  analytics:
-    reportErrors: true
-    reportUsage: true
-log:
-  level: "debug"
+# Default values for botkube.
+
+# Botkube settings
+botkube:
+  config:
+    settings:
+      clustername: "picluster"
+      upgradeNotifier: true
+      workloadNotifier: true
+
+    resources:
+      - name: "all-resources"
+        namespaces:
+          include:
+            - default
+            - kube-system
+          ignore:
+            - kube-public
+            - kube-node-lease
+        events:
+          - create
+          - delete
+          - error
+          - update
+
+    executors:
+      kubectl:
+        enabled: true
+        config: "/kubeconfig"
+
+    plugins:
+      botkubeecho:
+        enabled: true
+
+    analytics:
+      reportErrors: true
+      reportUsage: true
+
+# Communication settings
+communications:
+  discord:
+    enabled: true
+    secret:
+      name: "botkube-discord-secret"
+      key: "botToken"
+    channel: "1188268010394374234"
+    notifType: "short"
+
+# Image settings
+image:
+  repository: "raspbernetes/botkube"
+  tag: "latest"
+  pullPolicy: "IfNotPresent"
+
+# Resource requests and limits
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+# Node selector
+nodeSelector: {}
+
+# Tolerations for pods
+tolerations: []
+
+# Affinity for pods
+affinity: {}
