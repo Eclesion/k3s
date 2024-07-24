@@ -4,15 +4,22 @@ metadata:
   name: zabbix
   namespace: argocd
 spec:
-  project: default
+  destination:
+    name: ''
+    namespace: zabbix
+    server: 'https://kubernetes.default.svc'
   source:
+    path: charts/zabbix
     repoURL: 'https://github.com/eclesion/k3s.git'
     targetRevision: HEAD
-    path: charts/zabbix
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: zabbix
+    helm:
+      valueFiles:
+        - values.yaml
+  sources: []
+  project: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
