@@ -1,45 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "botkube.fullname" . }}
-  labels:
-    {{ include "botkube.labels" . | nindent 4 }}
+  name: botkube
+  namespace: botkube
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{ include "botkube.selectorLabels" . | nindent 6 }}
+      app: botkube
   template:
     metadata:
       labels:
-        {{ include "botkube.selectorLabels" . | nindent 8 }}
+        app: botkube
     spec:
       containers:
         - name: botkube
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "raspbernetes/botkube:latest"
+          imagePullPolicy: IfNotPresent
           env:
             - name: CONFIG_FILE_PATH
-              value: "/files/comm_config.yaml"
-            - name: RESOURCE_FILE_PATH
-              value: "/files/resource_config.yaml"
+              value: "/files/botkube-config.yaml"
           volumeMounts:
             - name: config-volume
-              mountPath: /files/comm_config.yaml
-              subPath: comm_config.yaml
-            - name: resource-config-volume
-              mountPath: /files/resource_config.yaml
-              subPath: resource_config.yaml
+              mountPath: /files/botkube-config.yaml
+              subPath: botkube-config.yaml
       volumes:
         - name: config-volume
           configMap:
             name: botkube-configmap
             items:
-              - key: comm_config.yaml
-                path: comm_config.yaml
-        - name: resource-config-volume
-          configMap:
-            name: botkube-configmap
-            items:
-              - key: resource_config.yaml
-                path: resource_config.yaml
+              - key: botkube-config.yaml
+                path: botkube-config.yaml

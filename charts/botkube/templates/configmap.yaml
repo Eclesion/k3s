@@ -3,8 +3,10 @@ kind: ConfigMap
 metadata:
   name: botkube-configmap
   namespace: botkube
+  labels:
+    app: botkube
 data:
-  comm_config.yaml: |
+  botkube-config.yaml: |
     communications:
       discord:
         enabled: true
@@ -13,7 +15,7 @@ data:
           key: "botToken"
         channel: "1188268010394374234"
         notifType: "short"
-  resource_config.yaml: |
+
     settings:
       clustername: "picluster"
       upgradeNotifier: true
