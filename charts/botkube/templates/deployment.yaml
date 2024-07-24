@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: botkube
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: CONFIG_FILE_PATH
