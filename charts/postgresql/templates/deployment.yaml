@@ -2,10 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgresql
-  labels:
-    app: postgresql
+  namespace: zabbix
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
       app: postgresql
@@ -15,24 +14,26 @@ spec:
         app: postgresql
     spec:
       containers:
-        - name: postgresql
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_USER
-              value: {{ .Values.postgresql.username }}
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-secret
-                  key: POSTGRESQL_PASSWORD
-            - name: POSTGRES_DB
-              value: {{ .Values.postgresql.database }}
-          volumeMounts:
-            - name: postgresql-data
-              mountPath: /var/lib/postgresql/data
-      volumes:
+      - name: postgresql
+        image: bitnami/postgresql:13.15.0
+        env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgresql-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          value: "zabbix"
+        - name: PGDATA
+          value: "/bitnami/postgresql"
+        ports:
+        - containerPort: 5432
+        volumeMounts:
         - name: postgresql-data
-          persistentVolumeClaim:
-            claimName: postgresql-pvc
+          mountPath: /bitnami/postgresql
+      volumes:
+      - name: postgresql-data
+        persistentVolumeClaim:
+          claimName: postgresql-pvc
