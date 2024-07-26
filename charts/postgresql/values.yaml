@@ -46,7 +46,7 @@ customConfig: |
 
 initContainers:
   - name: fix-permissions
-    image: bitnami/postgresql:latest
+    image: busybox
     command: ["sh", "-c", "chown -R 1001:1001 /bitnami/postgresql"]
     volumeMounts:
       - name: data
@@ -60,7 +60,6 @@ volumes:
   - name: data
     persistentVolumeClaim:
       claimName: postgresql-pvc
-
 
 
 #-Alternative to customConfig-
