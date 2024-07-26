@@ -14,6 +14,9 @@ postgresql:
   existingSecret: postgresql-secret
   secretKeys:
     password: POSTGRESQL_PASSWORD
+  securityContext:
+    runAsUser: 1001
+    fsGroup: 1001
 
 persistence:
   enabled: true
@@ -34,7 +37,12 @@ extraEnvVars:
         name: postgresql-secret
         key: POSTGRESQL_PASSWORD
 
-initdbScripts:
-  custom_pg_hba_conf.sh: |
-    #!/bin/bash
-    echo "host    all             all             0.0.0.0/0               md5" >> /opt/bitnami/postgresql/conf/pg_hba.conf
+customConfig: |
+  # TYPE  DATABASE        USER            ADDRESS                 METHOD
+  host    all             all             0.0.0.0/0               md5
+
+#-Alternative to customConfig-
+#initdbScripts:
+#  custom_pg_hba_conf.sh: |
+#    #!/bin/bash
+#    echo "host    all             all             0.0.0.0/0               md5" >> /opt/bitnami/postgresql/conf/pg_hba.conf
