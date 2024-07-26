@@ -43,6 +43,25 @@ customConfig: |
   # TYPE  DATABASE        USER            ADDRESS                 METHOD
   host    all             all             0.0.0.0/0               md5
 
+# Add the initContainer to fix ownership
+initContainers:
+  - name: fix-permissions
+    image: bitnami/postgresql:latest
+    command: ["sh", "-c", "chown -R 1001:1001 /bitnami/postgresql"]
+    volumeMounts:
+      - name: data
+        mountPath: /bitnami/postgresql
+
+# Ensure volume definition is consistent with PVC
+volumeMounts:
+  - name: data
+    mountPath: /bitnami/postgresql
+volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: postgresql-pvc
+
+
 
 #-Alternative to customConfig-
 #initdbScripts:
