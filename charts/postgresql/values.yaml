@@ -16,10 +16,12 @@ postgresql:
     password: POSTGRESQL_PASSWORD
   securityContext:
     runAsUser: 1001
+    runAsGroup: 1001
     fsGroup: 1001
 
 persistence:
   enabled: true
+  existingClaim: postgresql-pvc
   storageClass: longhorn
   accessModes:
     - ReadWriteOnce
