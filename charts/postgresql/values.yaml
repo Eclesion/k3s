@@ -41,6 +41,7 @@ customConfig: |
   # TYPE  DATABASE        USER            ADDRESS                 METHOD
   host    all             all             0.0.0.0/0               md5
 
+
 #-Alternative to customConfig-
 #initdbScripts:
 #  custom_pg_hba_conf.sh: |
