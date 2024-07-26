@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: postgresql
-        image: bitnami/postgresql:13.15.0
+        image: bitnami/postgresql:latest
         env:
         - name: POSTGRES_USER
           value: "postgres"
