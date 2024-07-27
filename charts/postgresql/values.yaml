@@ -21,7 +21,7 @@ postgresql:
 
 persistence:
   enabled: true
-  existingClaim: postgresql-pvc
+  existingClaim: ""
   storageClass: longhorn
   accessModes:
     - ReadWriteOnce
