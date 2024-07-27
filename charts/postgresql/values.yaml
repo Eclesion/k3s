@@ -40,13 +40,17 @@ extraEnvVars:
         key: ZABBIX_DB_PASSWORD
 
 initContainers:
-  - name: fix-permissions
+  - name: init-postgres
     image: busybox
-    command: ['sh', '-c', 'chown -R 1001:1001 /bitnami/postgresql']
+    command: ['sh', '-c', '
+      # Fix permissions on the data directory
+      chown -R 1001:1001 /bitnami/postgresql;
+      
+      # Create a custom pg_hba.conf file if needed
+      if [ ! -f /bitnami/postgresql/conf/pg_hba.conf ]; then
+        echo "host    all             all             0.0.0.0/0               md5" > /bitnami/postgresql/conf/pg_hba.conf;
+      fi
+    ']
     volumeMounts:
       - name: data
         mountPath: /bitnami/postgresql
-
-customConfig: |
-  # TYPE  DATABASE        USER            ADDRESS                 METHOD
-  host    all             all             0.0.0.0/0               md5
