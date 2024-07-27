@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "postgresql.name" . }}
-  namespace: zabbix
+  namespace: {{ .Values.namespace | default "default" }}
   labels:
     {{- include "postgresql.labels" . | nindent 4 }}
 spec:
@@ -16,7 +16,7 @@ spec:
         {{- include "postgresql.selectorLabels" . | nindent 8 }}
     spec:
       securityContext:
-        fsGroup: 1001
+        fsGroup: {{ .Values.postgresql.securityContext.fsGroup | default 1001 }}
       initContainers:
         {{- if .Values.initContainers }}
         {{- toYaml .Values.initContainers | nindent 8 }}
@@ -38,6 +38,20 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /bitnami/postgresql
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
       volumes:
         - name: data
           persistentVolumeClaim:
