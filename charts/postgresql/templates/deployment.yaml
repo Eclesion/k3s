@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "postgresql.name" . }}
+  namespace: zabbix
   labels:
     {{- include "postgresql.labels" . | nindent 4 }}
 spec:
@@ -17,12 +18,9 @@ spec:
       securityContext:
         fsGroup: 1001
       initContainers:
-        - name: fix-permissions
-          image: busybox
-          command: ['sh', '-c', 'chown -R 1001:1001 /bitnami/postgresql']
-          volumeMounts:
-            - name: data
-              mountPath: /bitnami/postgresql
+        {{- if .Values.initContainers }}
+        {{- toYaml .Values.initContainers | nindent 8 }}
+        {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
