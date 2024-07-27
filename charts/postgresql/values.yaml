@@ -19,6 +19,10 @@ postgresql:
     runAsGroup: 1000
     fsGroup: 1000
 
+serviceAccount:
+  name: postgresql-sa
+  create: false
+
 persistence:
   enabled: true
   existingClaim: postgresql-pvc
