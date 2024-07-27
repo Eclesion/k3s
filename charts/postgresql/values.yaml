@@ -9,11 +9,11 @@ service:
   port: 5432
 
 postgresql:
-  username: zabbix
-  database: zabbix
+  username: postgres
+  database: postgres
   existingSecret: postgresql-secret
   secretKeys:
-    password: POSTGRESQL_PASSWORD
+    password: POSTGRES_PASSWORD
   securityContext:
     runAsUser: 1001
     runAsGroup: 1001
@@ -33,11 +33,11 @@ extraEnvVars:
       secretKeyRef:
         name: postgresql-secret
         key: POSTGRES_PASSWORD
-  - name: POSTGRESQL_PASSWORD
+  - name: ZABBIX_DB_PASSWORD
     valueFrom:
       secretKeyRef:
         name: postgresql-secret
-        key: POSTGRESQL_PASSWORD
+        key: ZABBIX_DB_PASSWORD
 
 initContainers:
   - name: fix-permissions
