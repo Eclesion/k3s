@@ -15,13 +15,9 @@ postgresql:
   secretKeys:
     password: POSTGRESQL_PASSWORD
   securityContext:
-    runAsUser: 1000
-    runAsGroup: 1000
-    fsGroup: 1000
-
-serviceAccount:
-  name: postgresql-sa
-  create: false
+    runAsUser: 1001
+    runAsGroup: 1001
+    fsGroup: 1001
 
 persistence:
   enabled: true
@@ -47,15 +43,19 @@ customConfig: |
   # TYPE  DATABASE        USER            ADDRESS                 METHOD
   host    all             all             0.0.0.0/0               md5
 
-
 initContainers:
+  - name: inspect-permissions
+    image: busybox
+    command: ["sh", "-c", "ls -ld /bitnami/postgresql && ls -l /bitnami"]
+    volumeMounts:
+      - name: data
+        mountPath: /bitnami/postgresql
   - name: fix-permissions
     image: busybox
     command: ["sh", "-c", "chown -R 1001:1001 /bitnami/postgresql"]
     volumeMounts:
       - name: data
         mountPath: /bitnami/postgresql
-
 
 volumeMounts:
   - name: data
@@ -64,6 +64,11 @@ volumes:
   - name: data
     persistentVolumeClaim:
       claimName: postgresql-pvc
+
+serviceAccount:
+  name: postgresql-sa
+  create: false
+
 
 
 #-Alternative to customConfig-
