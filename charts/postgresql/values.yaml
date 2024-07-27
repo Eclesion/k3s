@@ -39,40 +39,11 @@ extraEnvVars:
         name: postgresql-secret
         key: POSTGRESQL_PASSWORD
 
+initContainers:
+  - name: fix-permissions
+    image: busybox
+    command: ['sh', '-c', 'chown -R 1001:1001 /bitnami/postgresql']
+
 customConfig: |
   # TYPE  DATABASE        USER            ADDRESS                 METHOD
   host    all             all             0.0.0.0/0               md5
-
-initContainers:
-  - name: inspect-permissions
-    image: busybox
-    command: ["sh", "-c", "ls -ld /bitnami/postgresql && ls -l /bitnami"]
-    volumeMounts:
-      - name: data
-        mountPath: /bitnami/postgresql
-  - name: fix-permissions
-    image: busybox
-    command: ["sh", "-c", "chown -R 1001:1001 /bitnami/postgresql"]
-    volumeMounts:
-      - name: data
-        mountPath: /bitnami/postgresql
-
-volumeMounts:
-  - name: data
-    mountPath: /bitnami/postgresql
-volumes:
-  - name: data
-    persistentVolumeClaim:
-      claimName: postgresql-pvc
-
-serviceAccount:
-  name: postgresql-sa
-  create: false
-
-
-
-#-Alternative to customConfig-
-#initdbScripts:
-#  custom_pg_hba_conf.sh: |
-#    #!/bin/bash
-#    echo "host    all             all             0.0.0.0/0               md5" >> /opt/bitnami/postgresql/conf/pg_hba.conf

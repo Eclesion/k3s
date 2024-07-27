@@ -3,8 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: postgresql-pvc
   namespace: zabbix
-  labels:
-    app: postgresql
 spec:
   accessModes:
     - ReadWriteOnce
