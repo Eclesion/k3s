@@ -7,8 +7,8 @@ metadata:
     {{- include "postgresql.labels" . | nindent 4 }}
 spec:
   accessModes:
-    - '[ReadWriteOnce]'
+    - ReadWriteOnce
   resources:
     requests:
       storage: {{ .Values.persistence.size }}
-  storageClassName: {{ .Values.persistence.storageClass | default "standard" }}
+  storageClassName: longhorn
