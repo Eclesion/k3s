@@ -1,3 +1,5 @@
+# charts/zabbix/values.yaml
+
 # Global settings
 global:
   imageRegistry: ""
@@ -76,8 +78,8 @@ postgresql:
       repository: bitnami/postgresql
       tag: "latest"
       pullPolicy: IfNotPresent
+    resources: {}
     persistence:
       accessMode: ReadWriteOnce
       size: 8Gi
       storageClass: longhorn
-    resources: {}
