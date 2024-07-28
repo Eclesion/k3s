@@ -8,7 +8,7 @@ service:
   port: 8080
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
   hosts:
     - host: dashy.picluster.dz.pzuj.net
