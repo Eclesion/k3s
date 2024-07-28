@@ -10,8 +10,8 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   accessModes:
-    - {{ .Values.postgresql.primary.persistence.accessMode }}
+    - {{ .Values.postgresql.primary.persistence.accessMode | default "ReadWriteOnce" }}
   resources:
     requests:
-      storage: {{ .Values.postgresql.primary.persistence.size }}
-  storageClassName: {{ .Values.postgresql.primary.persistence.storageClass }}
+      storage: {{ .Values.postgresql.primary.persistence.size | default "8Gi" }}
+  storageClassName: {{ .Values.postgresql.primary.persistence.storageClass | default "longhorn" }}
