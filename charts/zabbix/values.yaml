@@ -1,9 +1,13 @@
+# charts/zabbix/values.yaml
+
+# Global settings
 global:
   imageRegistry: ""
   imagePullSecrets: []
   storageClass: ""
-  zabbixDatabaseHost: {{ include "zabbix.fullname" . }}-postgresql
+  zabbixDatabaseHost: zabbix-postgresql
 
+# Zabbix configuration
 replicaCount: 1
 
 image:
@@ -21,7 +25,7 @@ ingress:
   enabled: false
   annotations: {}
   hosts:
-    - host: zabbix.picluster.dz.pzuj.net
+    - host: zabbix.local
       paths:
         - /
 
@@ -36,10 +40,22 @@ zabbix:
   server:
     env:
       - name: DB_SERVER_HOST
-        value: {{ include "zabbix.fullname" . }}-postgresql
+        value: zabbix-postgresql
       - name: POSTGRES_USER
         valueFrom:
           secretKeyRef:
             name: zabbix-postgresql
             key: postgresql-username
       - name: POSTGRES_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: zabbix-postgresql
+            key: postgresql-password
+      - name: POSTGRES_DB
+        valueFrom:
+          secretKeyRef:
+            name: zabbix-postgresql
+            key: postgresql-database
+  web:
+    image:
+      repository: zabbix/zabbix-web-nginx-pg
