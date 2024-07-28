@@ -1,36 +1,59 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "zabbix.fullname" . }}-postgresql
+  name: {{ template "zabbix.fullname" . }}-postgresql
+  namespace: zabbix
   labels:
-    app: {{ include "zabbix.name" . }}
+    app: {{ template "zabbix.name" . }}
+    chart: {{ template "zabbix.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ include "zabbix.name" . }}
+      app: {{ template "zabbix.name" . }}
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ include "zabbix.name" . }}
+        app: {{ template "zabbix.name" . }}
+        release: {{ .Release.Name }}
     spec:
+      volumes:
+        - name: custom-postgresql-config
+          configMap:
+            name: custom-postgresql-config
       containers:
         - name: postgresql
-          image: {{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}
-          imagePullPolicy: {{ .Values.postgresql.image.pullPolicy }}
-          env:
-            - name: POSTGRES_USER
-              value: {{ .Values.postgresql.postgresqlUsername }}
-            - name: POSTGRES_PASSWORD
-              value: {{ .Values.postgresql.postgresqlPassword }}
-            - name: POSTGRES_DB
-              value: {{ .Values.postgresql.postgresqlDatabase }}
+          image: "{{ .Values.postgresql.primary.image.repository }}:{{ .Values.postgresql.primary.image.tag }}"
+          imagePullPolicy: {{ .Values.postgresql.primary.image.pullPolicy }}
           ports:
             - containerPort: 5432
           volumeMounts:
-            - name: data
-              mountPath: /var/lib/postgresql/data
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: {{ include "zabbix.fullname" . }}-postgresql
+            - name: custom-postgresql-config
+              mountPath: /bitnami/postgresql/conf/pg_hba.conf
+              subPath: pg_hba.conf
+          env:
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "zabbix.fullname" . }}-postgresql
+                  key: postgresql-password
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - exec pg_isready --host {{ template "zabbix.fullname" . }}-postgresql --port 5432 --username postgres
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - exec pg_isready --host {{ template "zabbix.fullname" . }}-postgresql --port 5432 --username postgres
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
