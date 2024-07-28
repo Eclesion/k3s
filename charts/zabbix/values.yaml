@@ -15,8 +15,10 @@ postgresql:
   postgresqlDatabase: zabbix
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 10051
+  targetPort: 10051
+  loadBalancerIP: 192.168.68.212
 
 ingress:
   enabled: false

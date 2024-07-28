@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: {{ include "zabbix.fullname" . }}
   annotations:
-    metallb.universe.tf/address: "192.168.68.212"
 spec:
-  type: LoadBalancer
+  type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: 10051
+      targetPort: {{ .Values.service.targetPort }}
   selector:
     app: {{ include "zabbix.name" . }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
