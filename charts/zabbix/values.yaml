@@ -1,9 +1,11 @@
+# Global settings
 global:
   imageRegistry: ""
   imagePullSecrets: []
   storageClass: "longhorn"
   zabbixDatabaseHost: zabbix-postgresql
 
+# Zabbix configuration
 replicaCount: 1
 
 image:
@@ -74,7 +76,7 @@ postgresql:
       tag: "latest"
       pullPolicy: IfNotPresent
     resources: {}
-  persistence:
-    storageClass: longhorn
-    accessMode: ReadWriteOnce
-    size: 8Gi
+    persistence:
+      storageClass: longhorn
+      accessMode: ReadWriteOnce
+      size: 8Gi
