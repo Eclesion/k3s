@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "zabbix.fullname" . }}
+  namespace: zabbix
   labels:
     app: {{ include "zabbix.name" . }}
 spec:

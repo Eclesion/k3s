@@ -1,0 +1,10 @@
+primary:
+  extraVolumes:
+    - name: custom-postgresql-config
+      configMap:
+        name: custom-postgresql-config
+
+  extraVolumeMounts:
+    - name: custom-postgresql-config
+      mountPath: /bitnami/postgresql/conf/pg_hba.conf
+      subPath: pg_hba.conf

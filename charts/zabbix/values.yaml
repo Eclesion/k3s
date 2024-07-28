@@ -1,18 +1,16 @@
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: ""
+  zabbixDatabaseHost: zabbix-postgresql
+
+# Zabbix configuration
 replicaCount: 1
 
 image:
   repository: zabbix/zabbix-server-pgsql
   tag: "latest"
   pullPolicy: IfNotPresent
-
-postgresql:
-  image:
-    repository: bitnami/postgresql
-    tag: "latest"
-    pullPolicy: IfNotPresent
-  postgresqlUsername: zabbix
-  postgresqlPassword: zabbixpass
-  postgresqlDatabase: zabbix
 
 service:
   type: LoadBalancer
@@ -34,3 +32,47 @@ persistence:
   storageClass: longhorn
   accessMode: ReadWriteOnce
   size: 8Gi
+
+zabbix:
+  server:
+    env:
+      - name: DB_SERVER_HOST
+        value: zabbix-postgresql
+      - name: POSTGRES_USER
+        valueFrom:
+          secretKeyRef:
+            name: zabbix-postgresql
+            key: postgresql-username
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: zabbix-postgresql
+            key: postgresql-password
+      - name: POSTGRES_DB
+        valueFrom:
+          secretKeyRef:
+            name: zabbix-postgresql
+            key: postgresql-database
+  web:
+    image:
+      repository: zabbix/zabbix-web-nginx-pgsql
+      tag: "latest"
+      pullPolicy: IfNotPresent
+    resources: {}
+  agent:
+    image:
+      repository: zabbix/zabbix-agent
+      tag: "latest"
+      pullPolicy: IfNotPresent
+    resources: {}
+
+# PostgreSQL configuration
+postgresql:
+  enabled: true
+  existingSecret: zabbix-postgresql
+  primary:
+    image:
+      repository: bitnami/postgresql
+      tag: "latest"
+      pullPolicy: IfNotPresent
+    resources: {}

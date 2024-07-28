@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "zabbix.fullname" . }}-postgresql
+  namespace: zabbix
+  labels:
+    app: {{ template "zabbix.name" . }}
+    chart: {{ template "zabbix.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  serviceName: {{ template "zabbix.fullname" . }}-postgresql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "zabbix.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "zabbix.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      volumes:
+        - name: custom-postgresql-config
+          configMap:
+            name: custom-postgresql-config
+      containers:
+        - name: postgresql
+          image: "bitnami/postgresql:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: custom-postgresql-config
+              mountPath: /bitnami/postgresql/conf/pg_hba.conf
+              subPath: pg_hba.conf
+          env:
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "zabbix.fullname" . }}-postgresql
+                  key: postgresql-password
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - exec pg_isready --host {{ template "zabbix.fullname" . }}-postgresql --port 5432 --username postgres
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - exec pg_isready --host {{ template "zabbix.fullname" . }}-postgresql --port 5432 --username postgres
+            initialDelaySeconds: 5
+            timeoutSeconds

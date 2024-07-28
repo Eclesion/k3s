@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "zabbix.fullname" . }}-postgresql
+  name: {{ include "zabbix.fullname" . }}
+  namespace: zabbix
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 8Gi
+      storage: {{ .Values.persistence.size }}
   storageClassName: {{ .Values.persistence.storageClass }}
