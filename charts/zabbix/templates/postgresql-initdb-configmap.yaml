@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-initdb
+data:
+  initdb.sh: |
+    #!/bin/bash
+    set -e
+    createdb -O zabbix -E UTF8 -l en_US.UTF-8 -T template0 zabbix
+    echo "Database 'zabbix' created successfully."
