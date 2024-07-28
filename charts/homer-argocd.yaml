@@ -4,14 +4,19 @@ metadata:
   name: dashy
   namespace: argocd
 spec:
-  project: default
+  destination:
+    name: ''
+    namespace: homer
+    server: 'https://kubernetes.default.svc'
   source:
+    path: charts/dashy
     repoURL: 'https://github.com/Eclesion/k3s.git'
     targetRevision: HEAD
-    path: charts/dashy
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: homer
+    helm:
+      valueFiles:
+        - values.yaml
+  sources: []
+  project: default
   syncPolicy:
     automated:
       prune: true
@@ -21,8 +26,8 @@ spec:
   helm:
     parameters:
       - name: service.loadBalancerIP
-        value: '192.168.68.210'
-      - name: ingress.hosts[0].host
-        value: 'dashy.picluster.dz.pzuj.net'
-      - name: ingress.hosts[0].paths[0]
-        value: '/'
+        value: 192.168.68.210
+      - name: 'ingress.hosts[0].host'
+        value: dashy.picluster.dz.pzuj.net
+      - name: 'ingress.hosts[0].paths[0]'
+        value: /
