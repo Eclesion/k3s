@@ -1,13 +1,9 @@
-# charts/zabbix/values.yaml
-
-# Global settings
 global:
   imageRegistry: ""
   imagePullSecrets: []
   storageClass: ""
   zabbixDatabaseHost: zabbix-postgresql
 
-# Zabbix configuration
 replicaCount: 1
 
 image:
@@ -58,4 +54,23 @@ zabbix:
             key: postgresql-database
   web:
     image:
-      repository: zabbix/zabbix-web-nginx-pg
+      repository: zabbix/zabbix-web-nginx-pgsql
+      tag: "latest"
+      pullPolicy: IfNotPresent
+    resources: {}
+  agent:
+    image:
+      repository: zabbix/zabbix-agent
+      tag: "latest"
+      pullPolicy: IfNotPresent
+    resources: {}
+
+postgresql:
+  enabled: true
+  existingSecret: zabbix-postgresql
+  primary:
+    image:
+      repository: bitnami/postgresql
+      tag: "latest"
+      pullPolicy: IfNotPresent
+    resources: {}
