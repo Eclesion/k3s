@@ -1,0 +1,2 @@
+# charts/zabbix/.helmignore
+pg_hba.conf
