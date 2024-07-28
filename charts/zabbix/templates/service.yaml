@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ include "zabbix.fullname" . }}
   annotations:
-    metallb.universe.tf/address: 192.168.68.212
+    metallb.universe.tf/address: "192.168.68.212"
 spec:
   type: LoadBalancer
   ports:
