@@ -1,11 +1,9 @@
 apiVersion: v2
 name: zabbix
 description: A Helm chart for Zabbix
-type: application
 version: 0.1.0
-appVersion: "latest"
+appVersion: latest
 dependencies:
   - name: postgresql
-    version: "~12.1.0"
+    version: 12.8.3
     repository: "https://charts.bitnami.com/bitnami"
-    condition: postgresql.enabled
