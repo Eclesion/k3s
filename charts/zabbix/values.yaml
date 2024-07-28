@@ -2,9 +2,8 @@ global:
   imageRegistry: ""
   imagePullSecrets: []
   storageClass: ""
-  zabbixDatabaseHost: zabbix-postgresql
+  zabbixDatabaseHost: {{ include "zabbix.fullname" . }}-postgresql
 
-# Zabbix configuration
 replicaCount: 1
 
 image:
@@ -37,7 +36,7 @@ zabbix:
   server:
     env:
       - name: DB_SERVER_HOST
-        value: zabbix-postgresql
+        value: {{ include "zabbix.fullname" . }}-postgresql
       - name: POSTGRES_USER
         valueFrom:
           secretKeyRef:
@@ -66,7 +65,6 @@ zabbix:
       pullPolicy: IfNotPresent
     resources: {}
 
-# PostgreSQL configuration
 postgresql:
   enabled: true
   existingSecret: zabbix-postgresql
