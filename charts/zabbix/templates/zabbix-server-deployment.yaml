@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "zabbix.fullname" . }}
+  name: zabbix-server
   namespace: zabbix
   labels:
-    app: {{ include "zabbix.name" . }}
+    app: zabbix
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
-      app: {{ include "zabbix.name" . }}
+      app: zabbix
   template:
     metadata:
       labels:
-        app: {{ include "zabbix.name" . }}
+        app: zabbix
     spec:
       containers:
         - name: zabbix
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: bitnami/zabbix-server-pgsql:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: DB_SERVER_HOST
-              value: {{ include "zabbix.fullname" . }}-postgresql
+              value: zabbix-postgresql
             - name: POSTGRES_USER
-              value: {{ .Values.postgresql.postgresqlUsername }}
+              value: zabbix_user
             - name: POSTGRES_PASSWORD
-              value: {{ .Values.postgresql.postgresqlPassword }}
+              value: zabbix_password
             - name: POSTGRES_DB
-              value: {{ .Values.postgresql.postgresqlDatabase }}
+              value: zabbix_db
           ports:
             - containerPort: 10051
           volumeMounts:
@@ -36,4 +36,4 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: {{ include "zabbix.fullname" . }}
+            claimName: zabbix-server
