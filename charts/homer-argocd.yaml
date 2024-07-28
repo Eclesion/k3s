@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/Eclesion/k3s.git'
-    targetRevision: main
+    targetRevision: HEAD
     path: charts/dashy
   destination:
     server: 'https://kubernetes.default.svc'
