@@ -8,20 +8,16 @@ metadata:
     {{- end }}
 spec:
   rules:
-    {{- range .Values.ingress.hosts }}
-    - host: {{ .host }}
+    - host: {{ .Values.ingress.hosts[0].host }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ . }}
+          - path: {{ .Values.ingress.hosts[0].paths[0] }}
             pathType: Prefix
             backend:
               service:
                 name: {{ $.Release.Name }}-homer
                 port:
-                  number: 80
-          {{- end }}
-    {{- end }}
+                  number: {{ .Values.service.port }}
   tls:
     {{- range .Values.ingress.tls }}
     - secretName: {{ .secretName }}
