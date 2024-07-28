@@ -2,7 +2,7 @@
 global:
   imageRegistry: ""
   imagePullSecrets: []
-  storageClass: "longhorn"
+  storageClass: ""
   zabbixDatabaseHost: zabbix-postgresql
 
 # Zabbix configuration
@@ -67,6 +67,7 @@ zabbix:
       pullPolicy: IfNotPresent
     resources: {}
 
+# PostgreSQL configuration
 postgresql:
   enabled: true
   existingSecret: zabbix-postgresql
@@ -75,8 +76,8 @@ postgresql:
       repository: bitnami/postgresql
       tag: "latest"
       pullPolicy: IfNotPresent
-    resources: {}
     persistence:
-      storageClass: longhorn
       accessMode: ReadWriteOnce
       size: 8Gi
+      storageClass: longhorn
+    resources: {}
