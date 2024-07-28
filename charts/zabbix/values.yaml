@@ -2,27 +2,33 @@ replicaCount: 1
 
 image:
   repository: zabbix/zabbix-server-pgsql
-  tag: latest
+  tag: "latest"
   pullPolicy: IfNotPresent
 
-env:
-  - name: DB_SERVER_HOST
-    value: postgresql
-  - name: DB_SERVER_PORT
-    value: "5432"
-  - name: DB_SERVER_DBNAME
-    value: zabbix
-  - name: DB_SERVER_SCHEMA
-    value: public
+postgresql:
+  image:
+    repository: bitnami/postgresql
+    tag: "latest"
+    pullPolicy: IfNotPresent
+  postgresqlUsername: zabbix
+  postgresqlPassword: zabbixpass
+  postgresqlDatabase: zabbix
 
 service:
-  type: LoadBalancer
-  port: 8080
+  type: ClusterIP
+  port: 10051
 
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: zabbix.local
+      paths:
+        - /
 
+resources: {}
 persistence:
   enabled: true
   storageClass: longhorn
-  accessModes:
-    - ReadWriteOnce
-  size: 10Gi
+  accessMode: ReadWriteOnce
+  size: 8Gi

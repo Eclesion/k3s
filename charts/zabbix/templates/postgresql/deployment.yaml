@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "zabbix.fullname" . }}
+  name: {{ include "zabbix.fullname" . }}-postgresql
   labels:
     app: {{ include "zabbix.name" . }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
       app: {{ include "zabbix.name" . }}
@@ -15,12 +15,10 @@ spec:
         app: {{ include "zabbix.name" . }}
     spec:
       containers:
-        - name: zabbix
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: postgresql
+          image: {{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}
+          imagePullPolicy: {{ .Values.postgresql.image.pullPolicy }}
           env:
-            - name: DB_SERVER_HOST
-              value: {{ include "zabbix.fullname" . }}-postgresql
             - name: POSTGRES_USER
               value: {{ .Values.postgresql.postgresqlUsername }}
             - name: POSTGRES_PASSWORD
@@ -28,11 +26,11 @@ spec:
             - name: POSTGRES_DB
               value: {{ .Values.postgresql.postgresqlDatabase }}
           ports:
-            - containerPort: 10051
+            - containerPort: 5432
           volumeMounts:
             - name: data
-              mountPath: /var/lib/zabbix
+              mountPath: /var/lib/postgresql/data
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: {{ include "zabbix.fullname" . }}
+            claimName: {{ include "zabbix.fullname" . }}-postgresql

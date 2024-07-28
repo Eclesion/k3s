@@ -1,18 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: zabbix-ingress
+  name: {{ include "zabbix.fullname" . }}
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    {{- range $key, $value := .Values.ingress.annotations }}
+      {{ $key }}: {{ $value | quote }}
+    {{- end }}
 spec:
   rules:
-    - host: zabbix.dz.pzuj.net
+    - host: {{ .Values.ingress.hosts[0].host }}
       http:
         paths:
-          - path: /
+          - path: {{ .Values.ingress.hosts[0].paths[0] }}
             pathType: Prefix
             backend:
               service:
-                name: zabbix
+                name: {{ include "zabbix.fullname" . }}
                 port:
-                  number: 80
+                  number: {{ .Values.service.port }}

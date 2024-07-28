@@ -1,9 +1,0 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: postgresql-role
-  namespace: zabbix
-rules:
-- apiGroups: [""]
-  resources: ["secrets", "pods", "pods/log", "configmaps", "persistentvolumeclaims"]
-  verbs: ["get", "list", "watch", "create", "delete"]

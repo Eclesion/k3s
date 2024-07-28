@@ -1,13 +1,12 @@
-{{/*
-Generate the full name of the chart based on the release name and chart name.
-*/}}
-{{- define "zabbix.fullname" -}}
-{{- printf "%s-%s" .Release.Name "zabbix" | trunc 63 | trimSuffix "-" -}}
+{{- define "zabbix.name" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{/*
-Generate the name of the chart.
-*/}}
-{{- define "zabbix.name" -}}
-{{- "zabbix" -}}
+{{- define "zabbix.fullname" -}}
+{{- if .Values.fullnameOverride -}}
+{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
 {{- end -}}

@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postgresql
+  name: zabbix
   namespace: argocd
 spec:
   destination:
     name: ''
-    namespace: zabbix
+    namespace: default
     server: 'https://kubernetes.default.svc'
   source:
-    path: charts/postgresql
+    path: charts/zabbix
     repoURL: 'https://github.com/eclesion/k3s.git'
     targetRevision: HEAD
     helm:
@@ -23,4 +23,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-
