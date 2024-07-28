@@ -1,21 +1,24 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "zabbix.fullname" . }}-postgresql
+  name: {{ template "zabbix.fullname" . }}-postgresql
   namespace: zabbix
   labels:
-    {{- include "zabbix.labels" . | nindent 4 }}
+    app: {{ template "zabbix.name" . }}
+    chart: {{ template "zabbix.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
-  serviceName: {{ include "zabbix.fullname" . }}-postgresql
+  serviceName: {{ template "zabbix.fullname" . }}-postgresql
   replicas: 1
   selector:
     matchLabels:
-      app: {{ include "zabbix.name" . }}
+      app: {{ template "zabbix.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ include "zabbix.name" . }}
+        app: {{ template "zabbix.name" . }}
         release: {{ .Release.Name }}
     spec:
       volumes:
@@ -36,14 +39,14 @@ spec:
             - name: POSTGRESQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "zabbix.fullname" . }}-postgresql
+                  name: {{ template "zabbix.fullname" . }}-postgresql
                   key: postgresql-password
           livenessProbe:
             exec:
               command:
                 - /bin/sh
                 - -c
-                - exec pg_isready --host {{ include "zabbix.fullname" . }}-postgresql --port 5432 --username postgres
+                - exec pg_isready --host {{ template "zabbix.fullname" . }}-postgresql --port 5432 --username postgres
             initialDelaySeconds: 30
             timeoutSeconds: 5
             failureThreshold: 6
@@ -52,6 +55,6 @@ spec:
               command:
                 - /bin/sh
                 - -c
-                - exec pg_isready --host {{ include "zabbix.fullname" . }}-postgresql --port 5432 --username postgres
+                - exec pg_isready --host {{ template "zabbix.fullname" . }}-postgresql --port 5432 --username postgres
             initialDelaySeconds: 5
             timeoutSeconds: 5
