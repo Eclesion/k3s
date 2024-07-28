@@ -22,7 +22,7 @@ ingress:
   enabled: false
   annotations: {}
   hosts:
-    - host: zabbix.local
+    - host: zabbix.picluster.dz.pzuj.net
       paths:
         - /
 
