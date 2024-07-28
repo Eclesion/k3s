@@ -1,0 +1,4 @@
+apiVersion: v2
+name: dashy
+description: A Helm chart for Homer
+version: 0.1.0
