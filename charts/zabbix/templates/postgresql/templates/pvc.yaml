@@ -1,12 +1,17 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "zabbix.fullname" . }}-postgresql
+  name: {{ template "zabbix.fullname" . }}-postgresql
   namespace: zabbix
+  labels:
+    app: {{ template "zabbix.name" . }}
+    chart: {{ template "zabbix.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
   accessModes:
-    - ReadWriteOnce
+    - {{ .Values.postgresql.primary.persistence.accessMode }}
   resources:
     requests:
-      storage: 8Gi
-  storageClassName: {{ .Values.persistence.storageClass }}
+      storage: {{ .Values.postgresql.primary.persistence.size }}
+  storageClassName: {{ .Values.postgresql.primary.persistence.storageClass }}

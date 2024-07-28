@@ -8,3 +8,8 @@ primary:
     - name: custom-postgresql-config
       mountPath: /bitnami/postgresql/conf/pg_hba.conf
       subPath: pg_hba.conf
+
+persistence:
+  storageClass: longhorn
+  accessMode: ReadWriteOnce
+  size: 8Gi
