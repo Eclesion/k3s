@@ -40,8 +40,10 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
+  type: LoadBalancer
+  port: 8080
+  annotations:
+    metallb.universe.tf/address: "192.168.68.210"
 
 ingress:
   enabled: false
