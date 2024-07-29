@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dashy-config
+  namespace: homer
+  labels:
+    app.kubernetes.io/instance: dashy
+data:
+  config.yml: |
+    # Your Homer configuration here
+    ---
+    footer: false
+    header: true
+    links:
+      - icon: fab fa-github
+        name: Contribute
+        target: _blank
+        url: 'https://github.com/bastienwirtz/homer'
+      - icon: fas fa-book
+        name: Wiki
+        url: 'https://www.wikipedia.org/'
+    logo: logo.png
+    services:
+      - icon: fas fa-cloud
+        items:
+          - keywords: SSH
+            logo: assets/tools/bashterminali.png
+            name: Shell In A Box Pi
+            subtitle: Web SSH Pi UbuServ
+            tag: app
+            target: _blank
+            url: 'https://192.168.68.122:4200'
+          - keywords: SSH
+            logo: assets/tools/bashterminali.png
+            name: Shell In A Box DNSmac
+            subtitle: Web SSH DNS WM MacMini
+            tag: app
+            target: _blank
+            url: 'https://192.168.68.116:4200'
+          - keywords: 'portainer, docker'
+            logo: assets/tools/portainerlogo.png
+            name: Portainer
+            subtitle: Docker.io GUI
+            tag: GUI
+            target: _blank
+            url: 'http://192.168.68.122:9000'
+        name: Applications
+      - icon: fas fa-network-wired
+        items:
+          - keywords: Deeper
+            logo: assets/tools/deeperconnect.png
+            name: Deeper Network
+            subtitle: VPN Miner
+            tag: VPN
+            target: _blank
+            url: 'http://local.deeper.network'
+        name: Network
+      - icon: fas fa-computer
+        items:
+          - keywords: 'WM, ESXi, WMware, vSphere'
+            logo: assets/tools/wmware1.png
+            name: Pi WMware
+            subtitle: Raspberry vSphere 7.0
+            tag: WM
+            target: _blank
+            url: 'https://192.168.68.115'
+          - keywords: 'WM, Proxmox'
+            logo: assets/tools/proxmox.png
+            name: Proxmox Mac Mini
+            subtitle: Strawberry
+            tag: WM
+            target: _blank
+            url: 'https://192.168.68.126:8006'
+          - keywords: 'WM, ESXi, WMware, vSphere'
+            logo: assets/tools/wmware1.png
+            name: Mac Mini WMware
+            subtitle: Blueberry
+            tag: WM
+            target: _blank
+            url: 'https://192.168.68.129'
+          - keywords: 'WM, ESXi, WMware, vSphere'
+            logo: assets/tools/wmware1.png
+            name: Mac Mini Test WMware
+            subtitle: Blueberry
+            tag: WM
+            target: _blank
+            url: 'https://192.168.68.129'
+        name: Virtualisation
+    subtitle: Pi-Hosted ESXi UbuServ
+    theme: default
+    title: Raspberry Pi Server

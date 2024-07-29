@@ -2,4 +2,4 @@ apiVersion: v2
 name: postgresql
 description: A Helm chart for PostgreSQL
 version: 12.8.3
-appVersion: latest
+appVersion: "15.4.0"

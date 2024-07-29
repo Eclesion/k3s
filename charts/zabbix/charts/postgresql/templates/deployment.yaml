@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "zabbix.fullname" . }}-postgresql
+  name: zabbix-postgresql
   namespace: zabbix
   labels:
-    app: {{ template "zabbix.name" . }}
-    chart: {{ template "zabbix.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    app: zabbix
+    chart: zabbix-chart
+    release: zabbix-release
+    heritage: helm
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "zabbix.name" . }}
-      release: {{ .Release.Name }}
+      app: zabbix
+      release: zabbix-release
   template:
     metadata:
       labels:
-        app: {{ template "zabbix.name" . }}
-        release: {{ .Release.Name }}
+        app: zabbix
+        release: zabbix-release
     spec:
       volumes:
         - name: custom-postgresql-config
@@ -26,8 +26,8 @@ spec:
             name: custom-postgresql-config
       containers:
         - name: postgresql
-          image: "{{ .Values.postgresql.primary.image.repository }}:{{ .Values.postgresql.primary.image.tag }}"
-          imagePullPolicy: {{ .Values.postgresql.primary.image.pullPolicy }}
+          image: "bitnami/postgresql:latest"
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5432
           volumeMounts:
@@ -38,14 +38,14 @@ spec:
             - name: POSTGRESQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "zabbix.fullname" . }}-postgresql
+                  name: zabbix-postgresql
                   key: postgresql-password
           livenessProbe:
             exec:
               command:
                 - /bin/sh
                 - -c
-                - exec pg_isready --host {{ template "zabbix.fullname" . }}-postgresql --port 5432 --username postgres
+                - exec pg_isready --host zabbix-postgresql --port 5432 --username postgres
             initialDelaySeconds: 30
             timeoutSeconds: 5
             failureThreshold: 6
@@ -54,6 +54,6 @@ spec:
               command:
                 - /bin/sh
                 - -c
-                - exec pg_isready --host {{ template "zabbix.fullname" . }}-postgresql --port 5432 --username postgres
+                - exec pg_isready --host zabbix-postgresql --port 5432 --username postgres
             initialDelaySeconds: 5
             timeoutSeconds: 5

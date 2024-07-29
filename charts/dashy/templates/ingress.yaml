@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dashy-homer
+  namespace: homer
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    - host: dashy.picluster.dz.pzuj.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dashy-homer
+                port:
+                  number: 8080
+  tls:
+    # Optional, add TLS configuration if needed
+    - hosts:
+      - dashy.picluster.dz.pzuj.net
+      secretName: dashy-tls
