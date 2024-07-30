@@ -42,8 +42,8 @@ securityContext: {}
 service:
   type: LoadBalancer
   port: 8080
-  annotations:
-    metallb.universe.tf/address: "192.168.68.210"
+  targetPort: 8080
+  loadBalancerIP: 192.168.68.210  
 
 ingress:
   enabled: false
