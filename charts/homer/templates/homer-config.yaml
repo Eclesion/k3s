@@ -4,7 +4,7 @@ metadata:
   name: homer-config
   namespace: homer
 data:
-  config.yml: |
+  config.yml:
     title: "Raspberry Pi Server"
     subtitle: "Pi-Hosted ESXi UbuServ"
     logo: "logo.png"
