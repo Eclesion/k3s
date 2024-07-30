@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: homer
   namespace: homer
+  labels:
+    app: homer
 spec:
   replicas: 1
   selector:
@@ -10,19 +12,29 @@ spec:
       app: homer
   template:
     metadata:
+      annotations:
       labels:
         app: homer
     spec:
+      serviceAccountName: default
+      securityContext: {}
       containers:
-      - name: homer
-        image: b4bz/homer:latest
-        ports:
-        - containerPort: 8080
-        volumeMounts:
-        - name: config-volume
-          mountPath: /www/config/config.yml
-          subPath: config.yml
+        - name: homer
+          securityContext: {}
+          image: "b4bz/homer:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: config-volume
+              mountPath: /www/config/config.yml
+              subPath: config.yml
       volumes:
-      - name: config-volume
-        configMap:
-          name: homer-config
+        - name: config-volume
+          configMap:
+            name: homer-config
+      nodeSelector: {}
+      affinity: {}
+      tolerations: []
