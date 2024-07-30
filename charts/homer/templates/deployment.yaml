@@ -33,6 +33,7 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /www/config
+              subPath: config.yml
       volumes:
         - name: config-volume
           configMap:
