@@ -32,8 +32,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: config-volume
-              mountPath: /www/config/config.yml
-              subPath: config.yml
+              mountPath: /www/config
       volumes:
         - name: config-volume
           configMap:
