@@ -1,40 +1,53 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: homer
+  name: {{ include "homer.fullname" . }}
   namespace: homer
   labels:
-    app: homer
+    {{- include "homer.labels" . | nindent 4 }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: homer
+      {{- include "homer.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
       labels:
-        app: homer
+        {{- include "homer.labels" . | nindent 8 }}
     spec:
-      serviceAccountName: default
-      securityContext: {}
+      serviceAccountName: {{ include "homer.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: homer
-          securityContext: {}
-          image: "b4bz/homer:latest"
-          imagePullPolicy: IfNotPresent
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           volumeMounts:
             - name: config-volume
               mountPath: /www/config/config.yml
               subPath: config.yml
-      volumes:
-        - name: config-volume
-          configMap:
-            name: homer-config
-      nodeSelector: {}
-      affinity: {}
-      tolerations: []
+        volumes:
+          - name: config-volume
+            configMap:
+              name: homer-config
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
