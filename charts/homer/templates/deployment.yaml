@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "homer.fullname" . }}
+  namespace: homer
   labels:
     {{- include "homer.labels" . | nindent 4 }}
 spec:
@@ -31,7 +32,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: config-volume
-              mountPath: /www/config
+              mountPath: /www/config/config.yml
               subPath: config.yml
       volumes:
         - name: config-volume
