@@ -34,11 +34,10 @@ spec:
             - name: config-volume
               mountPath: /www/config/config.yml
               subPath: config.yml
-        volumes:
-          - name: config-volume
-            configMap:
-              name: homer-config
-
+      volumes:
+        - name: config-volume
+          configMap:
+            name: homer-config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
