@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "homer.fullname" . }}
-  namespace: homer
   labels:
     {{- include "homer.labels" . | nindent 4 }}
 spec:
@@ -34,10 +33,19 @@ spec:
             - name: config-volume
               mountPath: /www/config
               subPath: config.yml
+            {{- if .Values.persistence.enabled }}
+            - name: homer-pvc
+              mountPath: /www/data
+            {{- end }}
       volumes:
         - name: config-volume
           configMap:
             name: homer-config
+        {{- if .Values.persistence.enabled }}
+        - name: homer-pvc
+          persistentVolumeClaim:
+            claimName: {{ include "homer.fullname" . }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
