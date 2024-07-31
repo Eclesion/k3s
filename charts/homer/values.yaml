@@ -86,7 +86,7 @@ persistence:
     - ReadWriteOnce
   size: 6Gi
   storageClass: longhorn
-  existingClaim: ""
+  existingClaim: "homer"
 
 
 # Additional volumes on the output Deployment definition.

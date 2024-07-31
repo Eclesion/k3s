@@ -44,7 +44,7 @@ spec:
         {{- if .Values.persistence.enabled }}
         - name: homer-pvc
           persistentVolumeClaim:
-            claimName: {{ include "homer.fullname" . }}
+            claimName: {{ .Values.persistence.existingClaim | default (include "homer.fullname" .) }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
