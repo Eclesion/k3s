@@ -22,6 +22,12 @@ spec:
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
+        - name: install-gcc
+          image: ubuntu:latest
+          command: ['sh', '-c', 'apt-get update && apt-get install -y gcc g++ && apt-get clean']
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
       containers:
         - name: jenkins
           image: {{ .Values.master.image }}:{{ .Values.master.tag }}
@@ -33,9 +39,14 @@ spec:
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
+            - name: jenkins-backup
+              mountPath: /var/jenkins_backup
           securityContext:
             runAsUser: 1000
       volumes:
         - name: jenkins-home
           persistentVolumeClaim:
             claimName: {{ include "jenkins.name" . }}-pvc
+        - name: jenkins-backup
+          persistentVolumeClaim:
+            claimName: jenkins-backup-pvc
