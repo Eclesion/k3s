@@ -17,17 +17,13 @@ spec:
       serviceAccountName: jenkins-sa
       initContainers:
         - name: init-permissions
-          image: busybox
-          command: ['sh', '-c', 'mkdir -p /var/jenkins_home && chown -R 1000:1000 /var/jenkins_home']
-          volumeMounts:
-            - name: jenkins-home
-              mountPath: /var/jenkins_home
-        - name: install-gcc
           image: ubuntu:latest
-          command: ['sh', '-c', 'apt-get update && apt-get install -y gcc g++ && apt-get clean']
+          command: ['sh', '-c', 'apt-get update && apt-get install -y gcc g++ && apt-get clean && mkdir -p /var/jenkins_home /var/jenkins_backup && chown -R 1000:1000 /var/jenkins_home /var/jenkins_backup && chmod -R 775 /var/jenkins_home /var/jenkins_backup']
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
+            - name: jenkins-backup
+              mountPath: /var/jenkins_backup
       containers:
         - name: jenkins
           image: {{ .Values.master.image }}:{{ .Values.master.tag }}
