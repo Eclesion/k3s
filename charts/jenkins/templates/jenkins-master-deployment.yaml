@@ -18,7 +18,7 @@ spec:
       initContainers:
         - name: init-permissions
           image: ubuntu:latest
-          command: ['sh', '-c', 'apt-get update && apt-get install -y gcc g++ && apt-get clean && mkdir -p /var/jenkins_home /var/jenkins_backup && chown -R 1000:1000 /var/jenkins_home /var/jenkins_backup && chmod -R 775 /var/jenkins_home /var/jenkins_backup']
+          command: ['sh', '-c', 'apt-get update && apt-get install -y gcc g++ python3 python3-pip ruby-full openjdk-11-jdk docker.io && apt-get clean && mkdir -p /var/jenkins_home /var/jenkins_backup && chown -R 1000:1000 /var/jenkins_home /var/jenkins_backup && chmod -R 775 /var/jenkins_home /var/jenkins_backup']
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
