@@ -1,0 +1,47 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/settings
+
+
+theme: dark
+color: slate
+
+background:
+  image: /images/dashy-back.jpg
+  blur: sm # sm, "", md, xl... see https://tailwindcss.com/docs/backdrop-blur
+#  saturate: 50 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
+  brightness: 75 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
+  opacity: 75 # 0-100
+
+providers:
+  openweathermap: openweathermapapikey
+  weatherapi: weatherapiapikey
+#hosts:
+#  allowedHosts: # HOMEPAGE_ALLOWED_HOSTS required as of 1.0, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+#    - dashy.dz.pzuj.net
+#    - 192.168.68.2:3000
+
+layout:
+  Infrastructure:
+    header: true
+    style: row
+    columns: 3
+  Servers:
+    header: true
+    style: column
+  k3s Nodes:
+    header: true
+    style: column
+    columns: 3
+  Management:
+    header: true
+    style: column
+    columns: 3
+  Monitoring and Ticketing:
+    header: true
+    style: row
+    columns: 4
+  Services on k3s Pi-Cluster:
+    header: true
+    style: row
+    columns: 4
