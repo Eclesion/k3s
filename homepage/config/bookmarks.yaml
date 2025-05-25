@@ -1,0 +1,22 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Developer:
+    - Github:
+        - abbr: GH
+          href: https://github.com/eclesion
+
+- Social:
+    - Reddit:
+        - abbr: RE
+          href: https://reddit.com/r/homelab
+
+- Music:
+    - YouTube Music:
+        - abbr: YTM
+          href: https://music.youtube.com/
+- Video:
+    - YouTube:
+        - abbr: YT
+          href: https://youtube.com/
