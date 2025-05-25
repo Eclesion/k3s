@@ -136,10 +136,20 @@
         href: "{{HOMEPAGE_VAR_MESHCENTRAL_URL}}"
         description: Remote Service Windows Maschines
 
+    - TeamViewer:
+        icon: sh-teamviewer
+        href: "{{HOMEPAGE_VAR_TEAMVIEWER_URL}}"
+        description: TeamViewer Web Remote
+
     - Portainer:
         icon: sh-portainer
         href: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
         description: Portainer on Pi-Cluster
+
+    - Teams:
+        icon: sh-microsoft-teams
+        href: "{{HOMEPAGE_VAR_TEAMS_URL}}"
+        description: Microsoft Teams Web
 
 - Monitoring and Ticketing:
     - Zabbix:
