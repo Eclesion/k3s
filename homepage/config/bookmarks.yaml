@@ -20,3 +20,19 @@
     - YouTube:
         - abbr: YT
           href: https://youtube.com/
+- Icons:
+    -Selfhost Icons:
+        - abbr: SH
+          href: https://selfh.st/icons/
+    -Simple Icons:
+        - abbr: SI
+          href: https://simpleicons.org
+    -Material Design Icons:
+        - abbr: MDI
+          href: https://pictogrammers.com/library/mdi/
+    -Dashboard Icons:
+        - abbr: DI
+          href: https://dashboardicons.com/
+    -Emoji Combos:
+        - abbr: EC
+          href: https://emojicombos.com/
