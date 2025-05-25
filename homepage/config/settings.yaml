@@ -34,7 +34,7 @@ layout:
     header: true
     style: column
     columns: 3
-  Management:
+  Storage and Management:
     header: true
     style: column
     columns: 3
