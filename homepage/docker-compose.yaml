@@ -1,0 +1,16 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    env_file: .env # use .env
+    volumes:
+      - ./config:/app/config # Make sure your local config directory exists
+      - ./images:/app/public/images # Images folder mounted
+#      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations, see alternative methods
+    environment:
+      PUID: $PUID # read them from .env
+      PGID: $PGID # read them from .env
+      HOMEPAGE_ALLOWED_HOSTS: dashy.dz.pzuj.net,192.168.68.2:3000 # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
