@@ -1,0 +1,176 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Infrastructure:
+    - pfSense:
+        icon: sh-pfsense
+        href: "{{HOMEPAGE_VAR_PFSENSE_URL}}"
+        description: Firewall & Router
+
+    - Cisco Switch:
+        icon: si-cisco
+        href: "{{HOMEPAGE_VAR_CISCO_URL}}"
+        description: L2+/L3 Switch
+
+    - Dangerzone WiFi:
+        icon: mdi-wifi
+        href: "{{HOMEPAGE_VAR_WIFI_URL}}"
+        description: Short-Range HomeLab WiFi
+
+    - Deeper Connect Mini:
+        icon: sh-deepseek
+        href: "{{HOMEPAGE_VAR_DEEPER_URL}}"
+        description: VPN
+
+    - TP-Link Deco Mesh:
+        icon: si-tplink
+        href: "{{HOMEPAGE_VAR_DECO_URL}}"
+        description: WiFi Mesh
+
+    - Magenta Router:
+        icon: si-deutschetelekom
+        href: "{{HOMEPAGE_VAR_MAGENTA_URL}}"
+        description: ISP Router
+
+
+    - Name Server 1:
+        icon: sh-bind-9
+        href: NS1
+        description: NS MacMini - 192.168.68.10
+
+
+    - Name Server 2:
+        icon: sh-bind-9
+        href: "{{HOMEPAGE_VAR_NS2_URL}}"
+        description: NS Pi1 - 192.168.68.11
+
+    - Name Server 3:
+        icon: sh-bind-9
+        href: "{{HOMEPAGE_VAR_NS3_URL}}"
+        description: NS HP Mini - 192.168.68.12
+
+- Servers:
+    - Proxmox Strawberry:
+        icon: sh-proxmox
+        href: "{{HOMEPAGE_VAR_STRAWBERRY_URL}}"
+        description: Proxmox MacMini Node Strawberry
+
+    - Proxmox Blueberry:
+        icon: sh-proxmox
+        href: "{{HOMEPAGE_VAR_BLUEBERRY_URL}}"
+        description: Proxmox HP Mini Node Blueberry
+
+    - Proxmox Lemonberry:
+        icon: sh-proxmox
+        href: "{{HOMEPAGE_VAR_LEMONBERRY_URL}}"
+        description: Proxmox Lenovo Mini Node Lemonberry
+
+    - VMWare ESXi Rasp:
+        icon: si-vmware
+        href: "{{HOMEPAGE_VAR_RASP_URL}}"
+        description: ESXi 7 ARM Node 1 Rasp
+
+    - VMWare ESXi Berry:
+        icon: si-vmware
+        href: "{{HOMEPAGE_VAR_BERRY_URL}}"
+        description: ESXi 7 ARM Node 2 Berry
+
+    - VMWare ESXi Pi:
+        icon: si-vmware
+        href: "{{HOMEPAGE_VAR_PI_URL}}"
+        description: ESXi 7 ARM Node 3 Pi
+
+    - VMWare ESXi Fruit:
+        icon: si-vmware
+        href: "{{HOMEPAGE_VAR_FRUIT_URL}}"
+        description: ESXi 7 ARM Node 4 Fruit
+
+    - VMWare ESXi Salat:
+        icon: si-vmware
+        href: "{{HOMEPAGE_VAR_SALAT_URL}}"
+        description: ESXi 7 ARM Node 5 Salat
+
+- k3s Nodes:
+    - k3s Node Pi1:
+        icon: sh-kubernetes
+        href: "{{HOMEPAGE_VAR_PI1_URL}}"
+        description: k3s Node 1 Master
+
+    - k3s Node Pi2:
+        icon: sh-kubernetes
+        href: "{{HOMEPAGE_VAR_PI2_URL}}"
+        description: k3s Node 2 Worker
+
+    - k3s Node Pi3:
+        icon: sh-kubernetes
+        href: "{{HOMEPAGE_VAR_PI3_URL}}"
+        description: k3s Node 3 Worker
+
+    - k3s Node Pi4:
+        icon: sh-kubernetes
+        href: "{{HOMEPAGE_VAR_PI4_URL}}"
+        description: k3s Node 4 Worker
+
+    - k3s Node Pi5:
+        icon: sh-kubernetes
+        href: "{{HOMEPAGE_VAR_PI5_URL}}"
+        description: k3s Node 5 Worker
+
+- Management:
+    - BitWarden:
+        icon: sh-bitwarden
+        href: "{{HOMEPAGE_VAR_BITWARDEN_URL}}"
+        description: BitWarden Password Manager
+
+    - ChatGPT:
+        icon: sh-openai
+        href: "{{HOMEPAGE_VAR_CHATGPT_URL}}"
+        description: LLM
+
+    - MeshCentral:
+        icon: sh-meshcentral
+        href: "{{HOMEPAGE_VAR_MESHCENTRAL_URL}}"
+        description: Remote Service Windows Maschines
+
+    - Portainer:
+        icon: sh-portainer
+        href: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
+        description: Portainer on Pi-Cluster
+
+- Monitoring and Ticketing:
+    - Zabbix:
+        icon: sh-zabbix
+        href: "{{HOMEPAGE_VAR_ZABBIX_URL}}"
+        description: Monitoring
+        widget:
+          type: zabbix
+          url: "{{HOMEPAGE_VAR_ZABBIX_URL}}"
+          key: "{{HOMEPAGE_VAR_ZABBIX_API_TOKEN}}"
+
+    - Zammad:
+        icon: sh-zammad
+        href: "{{HOMEPAGE_VAR_ZAMMAD_URL}}"
+        description: Ticketing
+
+- Services on k3s Pi-Cluster:
+    - Longhorn:
+        icon: sh-rancher-longhorn
+        href: "{{HOMEPAGE_VAR_LONGHORN_URL}}"
+        description: Persistant Pi-Cluster Storage
+    - ArgoCD:
+        icon: sh-argo-cd
+        href: "{{HOMEPAGE_VAR_ARGOCD_URL}}"
+        description: ArgoCD on Pi-Cluster
+        widget:
+          type: argocd
+          url: "{{HOMEPAGE_VAR_ARGOCD_URL}}"
+          key: "{{HOMEPAGE_VAR_ARCOCD_API_TOKEN}}"
+    - Jenkins:
+        icon: sh-jenkins
+        href: "{{HOMEPAGE_VAR_JENKINS_URL}}"
+        description: Jenkins on Pi-Cluster
+    - OpenFaaS:
+        icon: si-openfaas
+        href: "{{HOMEPAGE_VAR_OPENFAAS_URL}}"
+        description: OpenFaaS on Pi-Cluster
