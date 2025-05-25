@@ -30,6 +30,7 @@ layout:
   Servers:
     header: true
     style: column
+    columns: 3
   k3s Nodes:
     header: true
     style: column
