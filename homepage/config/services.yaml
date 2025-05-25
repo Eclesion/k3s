@@ -36,7 +36,7 @@
 
     - Name Server 1:
         icon: sh-bind-9
-        href: NS1
+        href: "{{HOMEPAGE_VAR_NS1_URL}}"
         description: NS MacMini - 192.168.68.10
 
 
