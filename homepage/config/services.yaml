@@ -33,12 +33,10 @@
         href: "{{HOMEPAGE_VAR_MAGENTA_URL}}"
         description: ISP Router
 
-
     - Name Server 1:
         icon: sh-bind-9
         href: "{{HOMEPAGE_VAR_NS1_URL}}"
         description: NS MacMini - 192.168.68.10
-
 
     - Name Server 2:
         icon: sh-bind-9
@@ -117,7 +115,12 @@
         href: "{{HOMEPAGE_VAR_PI5_URL}}"
         description: k3s Node 5 Worker
 
-- Management:
+- Storage and Management:
+    - TrueNas:
+        icon: sh-truenas
+        href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
+        description: TrueNas Scale VM Storage and Backup
+        
     - BitWarden:
         icon: sh-bitwarden
         href: "{{HOMEPAGE_VAR_BITWARDEN_URL}}"
