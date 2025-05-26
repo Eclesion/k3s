@@ -23,6 +23,18 @@ providers:
 #    - 192.168.68.2:3000
 
 layout:
+  Organizer:
+    header: false
+    style: columns
+    columns: 3
+    widgets:
+      - Calendar
+      - MySpeed
+  Monitoring and Ticketing:
+    header: true
+    style: columns
+    columns: 3
+
   Infrastructure:
     header: true
     style: row
@@ -39,11 +51,20 @@ layout:
     header: true
     style: column
     columns: 3
-  Monitoring and Ticketing:
-    header: true
-    style: row
-    columns: 4
   Services on k3s Pi-Cluster:
     header: true
     style: row
     columns: 4
+
+  Developer and Social:
+    header: true
+    style: column
+    columns: 2
+  Music and Video:
+    header: true
+    style: column
+    columns: 2
+  Icons:
+    header: true
+    style: row
+    columns: 5
