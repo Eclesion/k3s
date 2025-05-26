@@ -5,18 +5,27 @@
 - Organizer:
     - Calendar:
         name: Calendar
+        href: "{{HOMEPAGE_VAR_CALENDAR_URL}}"
         widget:
           type: calendar
           firstDayInWeek: monday # optional - defaults to monday
           view: monthly # optional - possible values monthly, agenda
           maxEvents: 10 # optional - defaults to 10
           showTime: true # optional - show time for event happening today - defaults to false
-          timezone: Europe/Vienna # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing>          integrations: # optional
+          timezone: Europe/Vienna # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
+          integrations: # optional
             - type: ical # Show calendar events from another service
               name: Dangerzone Events
-              url: "https://calendar.google.com/calendar/ical/3106394fd48b397d0aa0ab555eafebcbea4178675b85d12de1aabcbdc4be2d5b%40group.calendar.google.com/public/basic.ics" # URL with calendar even>              color: blue # optional - defaults to pre-defined color for the service (zinc for ical)
+              url: "{{HOMEPAGE_VAR_CALENDAR_ICAL}}" # URL with calendar events
+              color: blue # optional - defaults to pre-defined color for the service (zinc for ical)
               params: # optional - additional params for the service
                 showName: true # optional - show name before event title in event line - defaults to false
+    - MySpeed:
+        name: Speed Test
+        href: "{{HOMEPAGE_VAR_MYSPEED_URL}}"
+        widget:
+          type: myspeed
+          url: "{{HOMEPAGE_VAR_MYSPEED_URL}}"
 
 - Infrastructure:
     - pfSense:
@@ -49,10 +58,12 @@
         href: "{{HOMEPAGE_VAR_MAGENTA_URL}}"
         description: ISP Router
 
+
     - Name Server 1:
         icon: sh-bind-9
         href: "{{HOMEPAGE_VAR_NS1_URL}}"
         description: NS MacMini - 192.168.68.10
+
 
     - Name Server 2:
         icon: sh-bind-9
@@ -69,16 +80,34 @@
         icon: sh-proxmox
         href: "{{HOMEPAGE_VAR_STRAWBERRY_URL}}"
         description: Proxmox MacMini Node Strawberry
+        widget:
+          type: proxmox
+          url: "{{HOMEPAGE_VAR_STRAWBERRY_URL}}"
+          username:  "{{HOMEPAGE_VAR_PROXMOX_API_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_API_PASSWORD}}"
+          node: strawberry
 
     - Proxmox Blueberry:
         icon: sh-proxmox
         href: "{{HOMEPAGE_VAR_BLUEBERRY_URL}}"
         description: Proxmox HP Mini Node Blueberry
+        widget:
+          type: proxmox
+          url: "{{HOMEPAGE_VAR_BLUEBERRY_URL}}"
+          username:  "{{HOMEPAGE_VAR_PROXMOX_API_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_API_PASSWORD}}"
+          node: blueberry
 
     - Proxmox Lemonberry:
         icon: sh-proxmox
         href: "{{HOMEPAGE_VAR_LEMONBERRY_URL}}"
         description: Proxmox Lenovo Mini Node Lemonberry
+        widget:
+          type: proxmox
+          url: "{{HOMEPAGE_VAR_LEMONBERRY_URL}}"
+          username:  "{{HOMEPAGE_VAR_PROXMOX_API_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_API_PASSWORD}}"
+          node: lemonberry
 
     - VMWare ESXi Rasp:
         icon: si-vmware-#FFFFFF
@@ -142,7 +171,7 @@
           key: "{{HOMEPAGE_VAR_TRUENAS_API_TOKEN}}"
           enablePools: true
           nasType: scale
-        
+
     - BitWarden:
         icon: sh-bitwarden
         href: "{{HOMEPAGE_VAR_BITWARDEN_URL}}"
@@ -167,7 +196,11 @@
         icon: sh-portainer
         href: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
         description: Portainer on Pi-Cluster
-
+#        widget:
+#          type: portainer
+#          url: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
+#          env: 2
+#          key: "{{HOMEPAGE_VAR_PORTAINER_API_TOKEN}}"
     - Teams:
         icon: sh-microsoft-teams
         href: "{{HOMEPAGE_VAR_TEAMS_URL}}"
