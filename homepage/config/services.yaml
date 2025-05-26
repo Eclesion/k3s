@@ -120,6 +120,12 @@
         icon: sh-truenas-scale
         href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
         description: TrueNas Scale VM Storage and Backup
+        widget:
+          type: truenas
+          url: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
+          key: "{{HOMEPAGE_VAR_TRUENAS_API_TOKEN}}"
+          enablePools: true
+          nasType: scale
         
     - BitWarden:
         icon: sh-bitwarden
