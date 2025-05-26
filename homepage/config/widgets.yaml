@@ -8,10 +8,22 @@
     disk: /
 
 - search:
-    provider: google
+    provider: [brave, google, duckduckgo]
+    focus: true
+    showSearchSuggestions: true
     target: _blank
 
 - datetime:
     text_size: xl
     format:
       timeStyle: short
+
+- openmeteo:
+    label: Wien
+    latitude: 48.2085
+    longitude: 16.3721
+    timezone: Europe/Vienna
+    units: metric
+    cache: 5
+    format:
+      maximumFractionDigits: 1
