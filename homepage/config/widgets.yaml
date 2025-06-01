@@ -27,3 +27,14 @@
     cache: 5
     format:
       maximumFractionDigits: 1
+
+- longhorn:
+    href: "{{HOMEPAGE_VAR_LONGHORN_URL}}"
+    # Show the expanded view
+    expanded: true
+    # Shows a node representing the aggregate values
+    total: true
+    # Shows the node names as labels
+    labels: true
+    # Show the nodes
+    nodes: true
