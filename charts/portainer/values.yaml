@@ -21,7 +21,7 @@ persistence:
   accessMode: ReadWriteOnce
   size: 20Gi
 serviceAccount:
-  create: false
+  create: true
   name: portainer-sa
 
 portainerHomeVolume:
