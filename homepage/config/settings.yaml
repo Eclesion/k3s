@@ -1,3 +1,4 @@
+
 ---
 # For configuration options and examples, please see:
 # https://gethomepage.dev/latest/configs/settings
@@ -6,6 +7,9 @@ title: ⚠️ Dangerzone Dashboard ⚡
 
 theme: dark
 color: slate
+#fullWidth: true
+useEqualHeights: true
+statusStyle: "basic"
 
 background:
   image: /images/dashy-back.jpg
@@ -17,6 +21,16 @@ background:
 providers:
   openweathermap: openweathermapapikey
   weatherapi: weatherapiapikey
+  longhorn:
+    url: "{{HOMEPAGE_VAR_LONGHORN_URL}}"
+
+#quicklaunch:
+#  searchDescriptions: true
+#  hideInternetSearch: true
+#  showSearchSuggestions: true
+#  hideVisitURL: true
+#  provider: google
+
 #hosts:
 #  allowedHosts: # HOMEPAGE_ALLOWED_HOSTS required as of 1.0, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
 #    - dashy.dz.pzuj.net
@@ -31,40 +45,62 @@ layout:
       - Calendar
       - MySpeed
   Monitoring and Ticketing:
+    icon: mdi-monitor-dashboard-#FFFFFF
     header: true
     style: columns
     columns: 3
 
   Infrastructure:
+    icon: mdi-lan-connect-#FFFFFF
     header: true
     style: row
     columns: 3
-  Servers:
-    header: true
-    style: column
-    columns: 3
-  k3s Nodes:
-    header: true
-    style: column
-    columns: 3
+
   Storage and Management:
-    header: true
-    style: column
-    columns: 3
-  Services on k3s Pi-Cluster:
+    icon: si-pcgamingwiki-#FFFFFF
     header: true
     style: row
-    columns: 4
+    columns: 3
+
+  Cluster:
+    header: false
+    style: row
+    columns: 3
+    Servers:
+      icon: mdi-server-#FFFFFF
+      header: true
+      style: column
+      columns: 3
+    k3s Nodes:
+      icon: mdi-kubernetes-#FFFFFF
+      header: true
+      style: column
+      columns: 3
+    Services on k3s Pi-Cluster:
+      icon: si-k3s-#FFFFFF
+      header: true
+      style: column
+      columns: 3
 
   Developer and Social:
+    icon: mdi-developer-board-#FFFFFF
     header: true
     style: column
     columns: 2
   Music and Video:
+    icon: si-youtube-#FFFFFF
     header: true
     style: column
     columns: 2
   Icons:
+    icon: mdi-simple-icons-#FFFFFF
     header: true
     style: row
     columns: 5
+
+  Bookmarks:
+    style: column
+    columns: 2
+    Developer and Social:
+    Music and Video:
+    Icons:
