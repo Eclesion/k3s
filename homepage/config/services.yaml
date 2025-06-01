@@ -23,194 +23,17 @@
     - MySpeed:
         name: Speed Test
         href: "{{HOMEPAGE_VAR_MYSPEED_URL}}"
+        siteMonitor: "{{HOMEPAGE_VAR_MYSPEED_URL}}"
         widget:
           type: myspeed
           url: "{{HOMEPAGE_VAR_MYSPEED_URL}}"
-
-- Infrastructure:
-    - pfSense:
-        icon: sh-pfsense
-        href: "{{HOMEPAGE_VAR_PFSENSE_URL}}"
-        description: Firewall & Router
-
-    - Cisco Switch:
-        icon: si-cisco-#FFFFFF
-        href: "{{HOMEPAGE_VAR_CISCO_URL}}"
-        description: L2+/L3 Switch
-
-    - Dangerzone WiFi:
-        icon: mdi-wifi-#FFFFFF
-        href: "{{HOMEPAGE_VAR_WIFI_URL}}"
-        description: Short-Range HomeLab WiFi
-
-    - Deeper Connect Mini:
-        icon: sh-deepseek
-        href: "{{HOMEPAGE_VAR_DEEPER_URL}}"
-        description: VPN
-
-    - TP-Link Deco Mesh:
-        icon: si-tplink-#FFFFFF
-        href: "{{HOMEPAGE_VAR_DECO_URL}}"
-        description: WiFi Mesh
-
-    - Magenta Router:
-        icon: si-deutschetelekom-#FFFFFF
-        href: "{{HOMEPAGE_VAR_MAGENTA_URL}}"
-        description: ISP Router
-
-
-    - Name Server 1:
-        icon: sh-bind-9
-        href: "{{HOMEPAGE_VAR_NS1_URL}}"
-        description: NS MacMini - 192.168.68.10
-
-
-    - Name Server 2:
-        icon: sh-bind-9
-        href: "{{HOMEPAGE_VAR_NS2_URL}}"
-        description: NS Pi1 - 192.168.68.11
-
-    - Name Server 3:
-        icon: sh-bind-9
-        href: "{{HOMEPAGE_VAR_NS3_URL}}"
-        description: NS HP Mini - 192.168.68.12
-
-- Servers:
-    - Proxmox Strawberry:
-        icon: sh-proxmox
-        href: "{{HOMEPAGE_VAR_STRAWBERRY_URL}}"
-        description: Proxmox MacMini Node Strawberry
-        widget:
-          type: proxmox
-          url: "{{HOMEPAGE_VAR_STRAWBERRY_URL}}"
-          username:  "{{HOMEPAGE_VAR_PROXMOX_API_USERNAME}}"
-          password: "{{HOMEPAGE_VAR_PROXMOX_API_PASSWORD}}"
-          node: strawberry
-
-    - Proxmox Blueberry:
-        icon: sh-proxmox
-        href: "{{HOMEPAGE_VAR_BLUEBERRY_URL}}"
-        description: Proxmox HP Mini Node Blueberry
-        widget:
-          type: proxmox
-          url: "{{HOMEPAGE_VAR_BLUEBERRY_URL}}"
-          username:  "{{HOMEPAGE_VAR_PROXMOX_API_USERNAME}}"
-          password: "{{HOMEPAGE_VAR_PROXMOX_API_PASSWORD}}"
-          node: blueberry
-
-    - Proxmox Lemonberry:
-        icon: sh-proxmox
-        href: "{{HOMEPAGE_VAR_LEMONBERRY_URL}}"
-        description: Proxmox Lenovo Mini Node Lemonberry
-        widget:
-          type: proxmox
-          url: "{{HOMEPAGE_VAR_LEMONBERRY_URL}}"
-          username:  "{{HOMEPAGE_VAR_PROXMOX_API_USERNAME}}"
-          password: "{{HOMEPAGE_VAR_PROXMOX_API_PASSWORD}}"
-          node: lemonberry
-
-    - VMWare ESXi Rasp:
-        icon: si-vmware-#FFFFFF
-        href: "{{HOMEPAGE_VAR_RASP_URL}}"
-        description: ESXi 7 ARM Node 1 Rasp
-
-    - VMWare ESXi Berry:
-        icon: si-vmware-#FFFFFF
-        href: "{{HOMEPAGE_VAR_BERRY_URL}}"
-        description: ESXi 7 ARM Node 2 Berry
-
-    - VMWare ESXi Pi:
-        icon: si-vmware-#FFFFFF
-        href: "{{HOMEPAGE_VAR_PI_URL}}"
-        description: ESXi 7 ARM Node 3 Pi
-
-    - VMWare ESXi Fruit:
-        icon: si-vmware-#FFFFFF
-        href: "{{HOMEPAGE_VAR_FRUIT_URL}}"
-        description: ESXi 7 ARM Node 4 Fruit
-
-    - VMWare ESXi Salat:
-        icon: si-vmware-#FFFFFF
-        href: "{{HOMEPAGE_VAR_SALAT_URL}}"
-        description: ESXi 7 ARM Node 5 Salat
-
-- k3s Nodes:
-    - k3s Node Pi1:
-        icon: sh-kubernetes
-        href: "{{HOMEPAGE_VAR_PI1_URL}}"
-        description: k3s Node 1 Master
-
-    - k3s Node Pi2:
-        icon: sh-kubernetes
-        href: "{{HOMEPAGE_VAR_PI2_URL}}"
-        description: k3s Node 2 Worker
-
-    - k3s Node Pi3:
-        icon: sh-kubernetes
-        href: "{{HOMEPAGE_VAR_PI3_URL}}"
-        description: k3s Node 3 Worker
-
-    - k3s Node Pi4:
-        icon: sh-kubernetes
-        href: "{{HOMEPAGE_VAR_PI4_URL}}"
-        description: k3s Node 4 Worker
-
-    - k3s Node Pi5:
-        icon: sh-kubernetes
-        href: "{{HOMEPAGE_VAR_PI5_URL}}"
-        description: k3s Node 5 Worker
-
-- Storage and Management:
-    - TrueNas:
-        icon: sh-truenas-scale
-        href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
-        description: TrueNas Scale VM Storage and Backup
-        widget:
-          type: truenas
-          url: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
-          key: "{{HOMEPAGE_VAR_TRUENAS_API_TOKEN}}"
-          enablePools: true
-          nasType: scale
-
-    - BitWarden:
-        icon: sh-bitwarden
-        href: "{{HOMEPAGE_VAR_BITWARDEN_URL}}"
-        description: BitWarden Password Manager
-
-    - ChatGPT:
-        icon: sh-openai
-        href: "{{HOMEPAGE_VAR_CHATGPT_URL}}"
-        description: LLM
-
-    - MeshCentral:
-        icon: sh-meshcentral
-        href: "{{HOMEPAGE_VAR_MESHCENTRAL_URL}}"
-        description: Remote Service Windows Maschines
-
-    - TeamViewer:
-        icon: sh-teamviewer
-        href: "{{HOMEPAGE_VAR_TEAMVIEWER_URL}}"
-        description: TeamViewer Web Remote
-
-    - Portainer:
-        icon: sh-portainer
-        href: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
-        description: Portainer on Pi-Cluster
-#        widget:
-#          type: portainer
-#          url: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
-#          env: 2
-#          key: "{{HOMEPAGE_VAR_PORTAINER_API_TOKEN}}"
-    - Teams:
-        icon: sh-microsoft-teams
-        href: "{{HOMEPAGE_VAR_TEAMS_URL}}"
-        description: Microsoft Teams Web
 
 - Monitoring and Ticketing:
     - Zabbix:
         icon: sh-zabbix
         href: "{{HOMEPAGE_VAR_ZABBIX_URL}}"
         description: Monitoring
+        siteMonitor: "{{HOMEPAGE_VAR_ZABBIX_URL}}"
         widget:
           type: zabbix
           url: "{{HOMEPAGE_VAR_ZABBIX_URL}}"
@@ -220,25 +43,242 @@
         icon: sh-zammad
         href: "{{HOMEPAGE_VAR_ZAMMAD_URL}}"
         description: Ticketing
+        siteMonitor: "{{HOMEPAGE_VAR_ZAMMAD_URL}}"
 
-- Services on k3s Pi-Cluster:
-    - Longhorn:
-        icon: sh-rancher-longhorn
-        href: "{{HOMEPAGE_VAR_LONGHORN_URL}}"
-        description: Persistant Pi-Cluster Storage
-    - ArgoCD:
-        icon: sh-argo-cd
-        href: "{{HOMEPAGE_VAR_ARGOCD_URL}}"
-        description: ArgoCD on Pi-Cluster
+- Infrastructure:
+    - pfSense:
+        icon: sh-pfsense
+        href: "{{HOMEPAGE_VAR_PFSENSE_URL}}"
+        description: Firewall & Router
+        siteMonitor: "{{HOMEPAGE_VAR_PFSENSE_URL}}"
+
+    - Cisco Switch:
+        icon: si-cisco-#FFFFFF
+        href: "{{HOMEPAGE_VAR_CISCO_URL}}"
+        description: L2+/L3 Switch
+        siteMonitor: "{{HOMEPAGE_VAR_CISCO_URL}}"
+
+    - Dangerzone WiFi:
+        icon: mdi-wifi-#FFFFFF
+        href: "{{HOMEPAGE_VAR_WIFI_URL}}"
+        description: Short-Range HomeLab WiFi
+        siteMonitor: "{{HOMEPAGE_VAR_WIFI_URL}}"
+
+    - Deeper Connect Mini:
+        icon: sh-deepseek
+        href: "{{HOMEPAGE_VAR_DEEPER_URL}}"
+        description: VPN
+#        siteMonitor: "{{HOMEPAGE_VAR_DEEPER_URL}}"
+
+    - TP-Link Deco Mesh:
+        icon: si-tplink-#FFFFFF
+        href: "{{HOMEPAGE_VAR_DECO_URL}}"
+        description: WiFi Mesh
+        siteMonitor: "{{HOMEPAGE_VAR_DECO_URL}}"
+
+    - Magenta Router:
+        icon: si-deutschetelekom-#FFFFFF
+        href: "{{HOMEPAGE_VAR_MAGENTA_URL}}"
+        description: ISP Router
+        siteMonitor: "{{HOMEPAGE_VAR_MAGENTA_URL}}"
+
+    - Name Server 1:
+        icon: sh-bind-9
+        href: "{{HOMEPAGE_VAR_NS1_URL}}"
+        description: NS MacMini - 192.168.68.10
+        siteMonitor: "{{HOMEPAGE_VAR_NS1_URL}}"
+
+    - Name Server 2:
+        icon: sh-bind-9
+        href: "{{HOMEPAGE_VAR_NS2_URL}}"
+        description: NS Pi1 - 192.168.68.11
+        siteMonitor: "{{HOMEPAGE_VAR_NS2_URL}}"
+
+    - Name Server 3:
+        icon: sh-bind-9
+        href: "{{HOMEPAGE_VAR_NS3_URL}}"
+        description: NS HP Mini - 192.168.68.12
+        siteMonitor: "{{HOMEPAGE_VAR_NS3_URL}}"
+
+- Storage and Management:
+    - MeshCentral:
+        icon: sh-meshcentral
+        href: "{{HOMEPAGE_VAR_MESHCENTRAL_URL}}"
+        description: Remote Service Windows Maschines
+        siteMonitor: "{{HOMEPAGE_VAR_MESHCENTRAL_URL}}"
+
+    - TeamViewer:
+        icon: sh-teamviewer
+        href: "{{HOMEPAGE_VAR_TEAMVIEWER_URL}}"
+        description: TeamViewer Web Remote
+        siteMonitor: "{{HOMEPAGE_VAR_TEAMVIEWER_URL}}"
+
+    - BitWarden:
+        icon: sh-bitwarden
+        href: "{{HOMEPAGE_VAR_BITWARDEN_URL}}"
+        description: BitWarden Password Manager
+        siteMonitor: "{{HOMEPAGE_VAR_BITWARDEN_URL}}"
+
+    - ChatGPT:
+        icon: sh-openai
+        href: "{{HOMEPAGE_VAR_CHATGPT_URL}}"
+        description: LLM
+        siteMonitor: "{{HOMEPAGE_VAR_CHATGPT_URL}}"
+
+    - Teams:
+        icon: sh-microsoft-teams
+        href: "{{HOMEPAGE_VAR_TEAMS_URL}}"
+        description: Microsoft Teams Web
+        siteMonitor: "{{HOMEPAGE_VAR_TEAMS_URL}}"
+
+    - Discord:
+        icon: sh-discord
+        href: "{{HOMEPAGE_VAR_DISCORD_URL}}"
+        description: Discord
+        siteMonitor: "{{HOMEPAGE_VAR_DISCORD_URL}}"
+
+    - TrueNas:
+        icon: sh-truenas-scale
+        href: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
+        description: TrueNas Scale VM Storage and Backup
+        siteMonitor: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
         widget:
-          type: argocd
-          url: "{{HOMEPAGE_VAR_ARGOCD_URL}}"
-          key: "{{HOMEPAGE_VAR_ARCOCD_API_TOKEN}}"
-    - Jenkins:
-        icon: sh-jenkins
-        href: "{{HOMEPAGE_VAR_JENKINS_URL}}"
-        description: Jenkins on Pi-Cluster
-    - OpenFaaS:
-        icon: si-openfaas-#FFFFFF
-        href: "{{HOMEPAGE_VAR_OPENFAAS_URL}}"
-        description: OpenFaaS on Pi-Cluster
+          type: truenas
+          url: "{{HOMEPAGE_VAR_TRUENAS_URL}}"
+          key: "{{HOMEPAGE_VAR_TRUENAS_API_TOKEN}}"
+          enablePools: true
+          nasType: scale
+
+- Cluster:
+    - Servers:
+        - Proxmox Strawberry:
+            icon: sh-proxmox
+            href: "{{HOMEPAGE_VAR_STRAWBERRY_URL}}"
+            description: Proxmox MacMini Node Strawberry
+            siteMonitor: "{{HOMEPAGE_VAR_STRAWBERRY_URL}}"
+            widget:
+              type: proxmox
+              url: "{{HOMEPAGE_VAR_STRAWBERRY_URL}}"
+              username:  "{{HOMEPAGE_VAR_PROXMOX_API_USERNAME}}"
+              password: "{{HOMEPAGE_VAR_PROXMOX_API_PASSWORD}}"
+              node: strawberry
+
+        - Proxmox Blueberry:
+            icon: sh-proxmox
+            href: "{{HOMEPAGE_VAR_BLUEBERRY_URL}}"
+            description: Proxmox HP Mini Node Blueberry
+            siteMonitor: "{{HOMEPAGE_VAR_BLUEBERRY_URL}}"
+            widget:
+              type: proxmox
+              url: "{{HOMEPAGE_VAR_BLUEBERRY_URL}}"
+              username:  "{{HOMEPAGE_VAR_PROXMOX_API_USERNAME}}"
+              password: "{{HOMEPAGE_VAR_PROXMOX_API_PASSWORD}}"
+              node: blueberry
+
+        - Proxmox Lemonberry:
+            icon: sh-proxmox
+            href: "{{HOMEPAGE_VAR_LEMONBERRY_URL}}"
+            description: Proxmox Lenovo Mini Node Lemonberry
+            siteMonitor: "{{HOMEPAGE_VAR_LEMONBERRY_URL}}"
+            widget:
+              type: proxmox
+              url: "{{HOMEPAGE_VAR_LEMONBERRY_URL}}"
+              username:  "{{HOMEPAGE_VAR_PROXMOX_API_USERNAME}}"
+              password: "{{HOMEPAGE_VAR_PROXMOX_API_PASSWORD}}"
+              node: lemonberry
+
+        - VMWare ESXi Rasp:
+            icon: si-vmware-#FFFFFF
+            href: "{{HOMEPAGE_VAR_RASP_URL}}"
+            description: ESXi 7 ARM Node 1 Rasp
+            siteMonitor: "{{HOMEPAGE_VAR_RASP_URL}}"
+
+        - VMWare ESXi Berry:
+            icon: si-vmware-#FFFFFF
+            href: "{{HOMEPAGE_VAR_BERRY_URL}}"
+            description: ESXi 7 ARM Node 2 Berry
+            siteMonitor: "{{HOMEPAGE_VAR_BERRY_URL}}"
+
+        - VMWare ESXi Pi:
+            icon: si-vmware-#FFFFFF
+            href: "{{HOMEPAGE_VAR_PI_URL}}"
+            description: ESXi 7 ARM Node 3 Pi
+            siteMonitor: "{{HOMEPAGE_VAR_PI_URL}}"
+
+        - VMWare ESXi Fruit:
+            icon: si-vmware-#FFFFFF
+            href: "{{HOMEPAGE_VAR_FRUIT_URL}}"
+            description: ESXi 7 ARM Node 4 Fruit
+            siteMonitor: "{{HOMEPAGE_VAR_FRUIT_URL}}"
+
+        - VMWare ESXi Salat:
+            icon: si-vmware-#FFFFFF
+            href: "{{HOMEPAGE_VAR_SALAT_URL}}"
+            description: ESXi 7 ARM Node 5 Salat
+            siteMonitor: "{{HOMEPAGE_VAR_SALAT_URL}}"
+
+    - k3s Nodes:
+        - k3s Node Pi1:
+            icon: sh-kubernetes
+            href: "{{HOMEPAGE_VAR_PI1_URL}}"
+            description: k3s Node 1 Master
+            siteMonitor: "{{HOMEPAGE_VAR_PI1_URL}}"
+
+        - k3s Node Pi2:
+            icon: sh-kubernetes
+            href: "{{HOMEPAGE_VAR_PI2_URL}}"
+            description: k3s Node 2 Worker
+            siteMonitor: "{{HOMEPAGE_VAR_PI2_URL}}"
+
+        - k3s Node Pi3:
+            icon: sh-kubernetes
+            href: "{{HOMEPAGE_VAR_PI3_URL}}"
+            description: k3s Node 3 Worker
+            siteMonitor: "{{HOMEPAGE_VAR_PI3_URL}}"
+
+        - k3s Node Pi4:
+            icon: sh-kubernetes
+            href: "{{HOMEPAGE_VAR_PI4_URL}}"
+            description: k3s Node 4 Worker
+            siteMonitor: "{{HOMEPAGE_VAR_PI4_URL}}"
+
+        - k3s Node Pi5:
+            icon: sh-kubernetes
+            href: "{{HOMEPAGE_VAR_PI5_URL}}"
+            description: k3s Node 5 Worker
+            siteMonitor: "{{HOMEPAGE_VAR_PI5_URL}}"
+
+    - Services on k3s Pi-Cluster:
+        - Longhorn:
+            icon: sh-rancher-longhorn-light
+            href: "{{HOMEPAGE_VAR_LONGHORN_URL}}"
+            description: Persistant Pi-Cluster Storage
+            siteMonitor: "{{HOMEPAGE_VAR_LONGHORN_URL}}"
+
+        - ArgoCD:
+            icon: sh-argo-cd
+            href: "{{HOMEPAGE_VAR_ARGOCD_URL}}"
+            description: ArgoCD on Pi-Cluster
+            siteMonitor: "{{HOMEPAGE_VAR_ARGOCD_URL}}"
+            widget:
+              type: argocd
+              url: "{{HOMEPAGE_VAR_ARGOCD_URL}}"
+              key: "{{HOMEPAGE_VAR_ARCOCD_API_TOKEN}}"
+
+        - Jenkins:
+            icon: sh-jenkins
+            href: "{{HOMEPAGE_VAR_JENKINS_URL}}"
+            description: Jenkins on Pi-Cluster
+            siteMonitor: "{{HOMEPAGE_VAR_JENKINS_URL}}"
+
+        - OpenFaaS:
+            icon: si-openfaas-#FFFFFF
+            href: "{{HOMEPAGE_VAR_OPENFAAS_URL}}"
+            description: OpenFaaS on Pi-Cluster
+            siteMonitor: "{{HOMEPAGE_VAR_OPENFAAS_URL}}"
+
+        - Portainer:
+            icon: sh-portainer
+            href: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
+            description: Portainer on Pi-Cluster
+            siteMonitor: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
