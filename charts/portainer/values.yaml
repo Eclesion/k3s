@@ -20,7 +20,9 @@ persistence:
   storageClass: longhorn
   accessMode: ReadWriteOnce
   size: 20Gi
-  
+serviceAccount:
+  create: false
+  name: portainer-sa
 
 portainerHomeVolume:
   enabled: true
